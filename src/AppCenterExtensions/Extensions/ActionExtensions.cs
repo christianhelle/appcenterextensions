@@ -5,7 +5,9 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions
 {
     public static class ActionExtensions
     {
-        public static void SafeInvoke(this Action action)
+        public static void SafeInvoke(
+            this Action action, 
+            Action<Exception> onError = null)
         {
             try
             {
@@ -14,6 +16,7 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions
             catch (Exception e)
             {
                 Debug.WriteLine(e);
+                onError?.Invoke(e);
             }
         }
     }
