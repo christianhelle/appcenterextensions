@@ -2,31 +2,33 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Input;
 using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
-using Microsoft.AppCenter.Analytics;
 
 namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Command
 {
-
     public class TrackingCommand<T> : ICommand
     {
         private readonly Action<T> action;
         private readonly Func<T, bool> canExecute;
+        private readonly IAnalytics analytics;
 
         public TrackingCommand(
             Action<T> action,
             string eventName,
             string screenName,
             Func<T, bool> canExecute = null,
-            Dictionary<string, string> properties = null)
+            Dictionary<string, string> properties = null,
+            IAnalytics analytics = null)
         {
+            this.action = action ?? throw new ArgumentNullException(nameof(action));
+
             if (string.IsNullOrWhiteSpace(eventName))
                 throw new ArgumentNullException(nameof(eventName));
 
             if (string.IsNullOrWhiteSpace(screenName))
                 throw new ArgumentNullException(nameof(screenName));
 
-            this.action = action;
             this.canExecute = canExecute;
+            this.analytics = analytics ?? AppCenterAnalytics.Instance;
 
             EventName = eventName;
             ScreenName = screenName;
@@ -61,7 +63,7 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Command
                     Properties[$"{parameterType}-{key}"] = value ?? string.Empty;
             }
 
-            Analytics.TrackEvent(
+            analytics.TrackEvent(
                 EventName,
                 Properties);
         }
