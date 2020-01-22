@@ -1,18 +1,21 @@
 ﻿using ChristianHelle.DeveloperTools.AppCenterExtensions.Command;
 using ChristianHelle.DeveloperTools.AppCenterExtensions.Commands;
+using Moq;
 using System;
+using System.Threading.Tasks;
 
 namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Commands
 {
-    public class TrackingCommandGenericTests : TrackingCommandBaseTests
+    public class AsyncTrackingCommandTests : TrackingCommandBaseTests
     {
         protected override void OnSetup(out ITrackingCommand sut)
         {
-            var action = new Action<Parameter>(p => executeCallCount++);
-            var canExecute = new Func<Parameter, bool>(p => ++canExecuteCallCount > 0);
+            var func = new Func<Task>(() => { executeCallCount++; return Task.CompletedTask; });
+            var canExecute = new Func<bool>(() => ++canExecuteCallCount > 0);
+            var analyticsMock = new Mock<IAnalytics>();
 
-            sut = new TrackingCommand<Parameter>(
-                action,
+            sut = new AsyncTrackingCommand(
+                func,
                 EventName,
                 ScreenName,
                 canExecute,
