@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Commands;
 using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Command
+namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Commands
 {
     public class TrackingCommand<T> : ITrackingCommand
     {

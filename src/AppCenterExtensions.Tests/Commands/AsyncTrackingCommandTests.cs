@@ -1,5 +1,4 @@
-﻿using ChristianHelle.DeveloperTools.AppCenterExtensions.Command;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Commands;
+﻿using ChristianHelle.DeveloperTools.AppCenterExtensions.Commands;
 using Moq;
 using System;
 using System.Threading.Tasks;

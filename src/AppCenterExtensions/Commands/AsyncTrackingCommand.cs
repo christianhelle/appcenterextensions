@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Commands;
 using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
-using Microsoft.AppCenter.Analytics;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Command
+namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Commands
 {
     public class AsyncTrackingCommand : ITrackingCommand
     {
