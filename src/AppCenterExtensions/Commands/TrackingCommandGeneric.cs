@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Windows.Input;
+using ChristianHelle.DeveloperTools.AppCenterExtensions.Commands;
 using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
 
 namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Command
 {
-    public class TrackingCommand<T> : ICommand
+    public class TrackingCommand<T> : ITrackingCommand
     {
         private readonly Action<T> action;
         private readonly Func<T, bool> canExecute;

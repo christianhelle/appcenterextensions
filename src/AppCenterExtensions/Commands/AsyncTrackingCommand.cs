@@ -2,22 +2,25 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ChristianHelle.DeveloperTools.AppCenterExtensions.Commands;
 using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
 using Microsoft.AppCenter.Analytics;
 
 namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Command
 {
-    public class AsyncTrackingCommand : ICommand
+    public class AsyncTrackingCommand : ITrackingCommand
     {
         private readonly Func<Task> executeFunc;
         private readonly Func<bool> canExecute;
+        private readonly IAnalytics analytics;
 
         public AsyncTrackingCommand(
             Func<Task> executeFunc,
             string eventName,
             string screenName,
             Func<bool> canExecute = null,
-            Dictionary<string, string> properties = null)
+            Dictionary<string, string> properties = null,
+            IAnalytics analytics = null)
         {
             this.executeFunc = executeFunc ?? throw new ArgumentNullException(nameof(executeFunc));
 
@@ -33,6 +36,8 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Command
             EventName = eventName;
             ScreenName = screenName;
             Properties = properties ?? new Dictionary<string, string>();
+
+            this.analytics = analytics ?? AppCenterAnalytics.Instance;
         }
 
         public string EventName { get; }
@@ -69,7 +74,7 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Command
                     Properties[$"{parameterType}-{item.Key}"] = item.Value ?? string.Empty;
             }
 
-            Analytics.TrackEvent(
+            analytics.TrackEvent(
                 EventName,
                 Properties);
         }

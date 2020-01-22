@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Input;
+using ChristianHelle.DeveloperTools.AppCenterExtensions.Commands;
 using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
-using Microsoft.AppCenter.Analytics;
 
 namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Command
 {
-    public class TrackingCommand
-        : ICommand
+    public class TrackingCommand : ITrackingCommand
     {
         private readonly Action action;
         private readonly Func<bool> canExecute;
@@ -41,16 +39,16 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Command
         public string ScreenName { get; }
         public Dictionary<string, string> Properties { get; }
 
-        public bool CanExecute(object parameter) 
+        public bool CanExecute(object parameter)
             => canExecute?.Invoke() ?? true;
 
         public void Execute(object parameter)
         {
             if (!CanExecute(parameter))
                 return;
-            
+
             action();
-            
+
             Properties[nameof(EventName)] = EventName;
             Properties[nameof(ScreenName)] = ScreenName;
 
