@@ -11,7 +11,6 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Commands
         {
             var func = new Func<Task>(() => { executeCallCount++; return Task.CompletedTask; });
             var canExecute = new Func<bool>(() => ++canExecuteCallCount > 0);
-            var analyticsMock = new Mock<IAnalytics>();
 
             sut = new AsyncTrackingCommand(
                 func,
