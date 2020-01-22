@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Commands
 {
-    public class AsyncTrackingCommandTests : TrackingCommandBaseTests
+    public sealed class AsyncTrackingCommandTests : TrackingCommandBaseTests
     {
         protected override void OnSetup(out ITrackingCommand sut)
         {

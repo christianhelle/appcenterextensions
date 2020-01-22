@@ -12,8 +12,8 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Commands
         protected const string EventName = "Unit Test Started";
         protected const string ScreenName = "Unit Test";
         protected int executeCallCount, canExecuteCallCount;
-        protected readonly ITrackingCommand sut;
         protected readonly Mock<IAnalytics> analyticsMock;
+        private readonly ITrackingCommand sut;
 
         protected TrackingCommandBaseTests()
         {

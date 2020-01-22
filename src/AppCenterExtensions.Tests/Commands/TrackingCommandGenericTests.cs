@@ -3,7 +3,7 @@ using System;
 
 namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Commands
 {
-    public class TrackingCommandGenericTests : TrackingCommandBaseTests
+    public sealed class TrackingCommandGenericTests : TrackingCommandBaseTests
     {
         protected override void OnSetup(out ITrackingCommand sut)
         {
