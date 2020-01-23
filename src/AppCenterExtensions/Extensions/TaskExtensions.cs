@@ -20,7 +20,7 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions
             }
             catch (Exception ex)
             {
-                ex.Log();
+                ex.Report();
             }
         }
 
@@ -32,7 +32,7 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions
             }
             catch (Exception ex)
             {
-                ex.Log();
+                ex.Report();
             }
         }
 
@@ -44,7 +44,7 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions
             }
             catch (Exception ex)
             {
-                ex.Log();
+                ex.Report();
                 return null;
             }
         }

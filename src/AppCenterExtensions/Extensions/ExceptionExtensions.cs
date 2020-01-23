@@ -23,8 +23,5 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions
                 Crashes.TrackError(e);
             }
         }
-
-        public static void Log(this Exception exception)
-            => exception.Report();
     }
 }
