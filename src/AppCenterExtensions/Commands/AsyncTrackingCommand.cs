@@ -65,10 +65,10 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Commands
 
             if (parameter != null)
             {
-                string parameterType = parameter.GetType().Name;
+                var parameterType = parameter.GetType().Name;
                 Properties["Parameter"] = parameterType;
-                foreach (var item in parameter.ToDictionary())
-                    Properties[$"{parameterType}-{item.Key}"] = item.Value ?? string.Empty;
+                foreach (var (key, value) in parameter.ToDictionary())
+                    Properties[$"{parameterType}-{key}"] = value ?? string.Empty;
             }
 
             analytics.TrackEvent(
