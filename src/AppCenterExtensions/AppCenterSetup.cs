@@ -10,7 +10,7 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions
             => AppCenter.SetUserId(
                 await GetSupportKeyAsync());
 
-        private static async Task<string> GetSupportKeyAsync()
+        public static async Task<string> GetSupportKeyAsync()
             => (await AppCenter.GetInstallIdAsync() ?? Guid.NewGuid())
                 .ToString()
                 .Substring(0, 8);
