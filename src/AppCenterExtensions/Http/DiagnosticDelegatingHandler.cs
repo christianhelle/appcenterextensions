@@ -5,17 +5,30 @@ using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AppCenter;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions
+namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Http
 {
     public class DiagnosticDelegatingHandler : DelegatingHandler
     {
+        private readonly IAppCenterSetup appCenterSetup;
         private readonly IAnalytics analytics;
 
-        public DiagnosticDelegatingHandler(IAnalytics analytics = null)
+        public DiagnosticDelegatingHandler(
+            IAnalytics analytics = null,
+            IAppCenterSetup appCenterSetup = null)
         {
             this.analytics = analytics ?? new AppCenterAnalytics();
+            this.appCenterSetup = appCenterSetup ?? AppCenterSetup.Instance;
+        }
+
+        public DiagnosticDelegatingHandler(
+            HttpMessageHandler innerHandler,
+            IAnalytics analytics = null,
+            IAppCenterSetup appCenterSetup = null)
+            : base(innerHandler)
+        {
+            this.analytics = analytics ?? new AppCenterAnalytics();
+            this.appCenterSetup = appCenterSetup ?? AppCenterSetup.Instance;
         }
 
         protected override async Task<HttpResponseMessage> SendAsync(
@@ -26,46 +39,49 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions
             return await SendRequest(request, cancellationToken);
         }
 
-        private static async Task AddSupportInformationHeaders(HttpRequestMessage request)
+        private async Task AddSupportInformationHeaders(HttpRequestMessage request)
         {
             request.Headers.Add(
                 "X-AppCenterSdkVersion",
-                AppCenter.SdkVersion);
+                appCenterSetup.AppCenterSdkVersion);
 
-            var installIdAsync = await AppCenter.GetInstallIdAsync();
+            var installIdAsync = await appCenterSetup.GetAppCenterInstallIdAsync();
             if (installIdAsync != null)
             {
                 request.Headers.Add(
-                    "X-AppCenterSdkVersion",
+                    "X-AppCenterInstallId",
                     installIdAsync.ToString());
             }
 
             request.Headers.Add(
                 "X-SupportKey",
-                await AppCenterSetup.GetSupportKeyAsync());
+                await appCenterSetup.GetSupportKeyAsync());
         }
 
         private async Task<HttpResponseMessage> SendRequest(
-            HttpRequestMessage request, 
+            HttpRequestMessage request,
             CancellationToken cancellationToken)
         {
             var stopwatch = Stopwatch.StartNew();
-            
+
             HttpResponseMessage response = null;
             try
             {
                 response = await base.SendAsync(request, cancellationToken);
+
+                if (!response.IsSuccessStatusCode) 
+                    TrackHttpErrorEvent(request, stopwatch, response);
             }
             catch (Exception e)
             {
                 stopwatch.Stop();
                 Debug.WriteLine(e);
-                TrackHttpErrorEvent(request, e, stopwatch, response);
+                TrackHttpErrorEvent(request, stopwatch, response, e);
                 throw;
             }
             finally
             {
-                if (response != null) 
+                if (response != null)
                     TraceResponseTime(request, response, stopwatch);
             }
 
@@ -74,7 +90,7 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions
 
         private static void TraceResponseTime(
             HttpRequestMessage request,
-            HttpResponseMessage response, 
+            HttpResponseMessage response,
             Stopwatch stopwatch)
         {
             var status = response.StatusCode;
@@ -85,23 +101,24 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions
             Debug.WriteLine(message);
         }
 
-        private void TrackHttpErrorEvent(
-            HttpRequestMessage request,
-            Exception exception,
+        private void TrackHttpErrorEvent(HttpRequestMessage request,
             Stopwatch stopwatch,
-            HttpResponseMessage response)
+            HttpResponseMessage response = null,
+            Exception exception = null)
         {
             var properties = new Dictionary<string, string>
             {
-                {nameof(Exception), exception.Message},
                 {"Endpoint", $"{request.Method} {request.RequestUri.AbsoluteUri}"},
                 {"Duration", stopwatch.Elapsed.ToString()}
             };
 
+            if (exception != null)
+                properties.Add(nameof(Exception), exception.Message);
+
             if (response != null)
-            {
-                properties.Add(nameof(HttpStatusCode), $"{response.StatusCode} ({(int) response.StatusCode})");
-            }
+                properties.Add(
+                    nameof(HttpStatusCode),
+                    $"{response.StatusCode} ({(int) response.StatusCode})");
 
             analytics.TrackEvent("HTTP Error", properties);
         }
