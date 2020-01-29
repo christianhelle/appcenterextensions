@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
@@ -10,6 +12,7 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
 {
     public class TrackingApplication : Application
     {
+        private static bool appStartReported;
         private readonly IAppCenterSetup appCenterSetup;
         public static Stopwatch AppLaunchTime { get; } = Stopwatch.StartNew();
 
@@ -47,6 +50,24 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
                 appCenterSetup.UseAnonymousUserIdAsync();
 
             appCenterSetup.LogLevel = LogLevel.Verbose;
+        }
+
+        [ExcludeFromCodeCoverage]
+        public static void TrackAppStart(string startPage)
+        {
+            if (appStartReported)
+                return;
+            appStartReported = true;
+
+            AppLaunchTime.Stop();
+            
+            Analytics.TrackEvent(
+                "App Startup",
+                new Dictionary<string, string>
+                {
+                    {"Duration", AppLaunchTime.Elapsed.ToString()},
+                    {"Start Page", startPage}
+                });
         }
     }
 }
