@@ -8,7 +8,6 @@ using Xamarin.Forms;
 
 namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
 {
-    [ExcludeFromCodeCoverage]
     public class TrackingApplication : Application
     {
         private readonly IAppCenterSetup appCenterSetup;
@@ -19,7 +18,10 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
             bool anonymizeAppCenterUser,
             IAppCenterSetup appCenterSetup = null)
         {
-            this.appCenterSetup = appCenterSetup;
+            if (appCenterSecrets == null)
+                throw new ArgumentNullException(nameof(appCenterSecrets));
+
+            this.appCenterSetup = appCenterSetup ?? new AppCenterSetup();
             StartAppCenterSdk(appCenterSecrets, anonymizeAppCenterUser);
         }
 
@@ -39,19 +41,12 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
             string appCenterSecrets,
             bool anonymizeAppCenterUser)
         {
-            try
-            {
-                appCenterSetup.Start(appCenterSecrets);
+            appCenterSetup.Start(appCenterSecrets);
 
-                if (anonymizeAppCenterUser)
-                    appCenterSetup.UseAnonymousUserIdAsync();
+            if (anonymizeAppCenterUser)
+                appCenterSetup.UseAnonymousUserIdAsync();
 
-                appCenterSetup.LogLevel = LogLevel.Verbose;
-            }
-            catch (Exception e)
-            {
-                Trace.TraceError(e.ToString());
-            }
+            appCenterSetup.LogLevel = LogLevel.Verbose;
         }
     }
 }
