@@ -30,7 +30,7 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
             => StartAppCenterSdk(
                 GetAppCenterSecrets(appleSecret, androidSecret),
                 anonymizeAppCenterUser,
-                appCenterSetup);
+                appCenterSetup ?? AppCenterSetup.Instance);
 
         public static void Initialize(
             string secret,
@@ -39,16 +39,13 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
             => StartAppCenterSdk(
                 secret,
                 anonymizeAppCenterUser,
-                appCenterSetup);
+                appCenterSetup ?? AppCenterSetup.Instance);
 
         private static void StartAppCenterSdk(
             string appCenterSecrets,
             bool anonymizeAppCenterUser,
             IAppCenterSetup appCenterSetup)
         {
-            if (appCenterSetup == null)
-                appCenterSetup = AppCenterSetup.Instance;
-
             appCenterSetup.Start(appCenterSecrets);
 
             if (anonymizeAppCenterUser)
