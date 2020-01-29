@@ -29,5 +29,9 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Extensions
         [InlineData("SubmitDataAsync")]
         public void ToTrackingEventName_Splits_Class_Name_To_Words(string className)
             => className.ToTrackingEventName().Split(" ").Should().NotBeNullOrEmpty();
+
+        [Fact]
+        public void TrimNames_NotEmpty()
+            => StringExtension.TrimNames.Should().NotBeNullOrEmpty();
     }
 }
