@@ -14,7 +14,6 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions
                 .Replace("Command", string.Empty)
                 .Replace("View", string.Empty)
                 .Replace("Model", string.Empty)
-                .Replace("Page", string.Empty)
                 .Replace("Async", string.Empty)
                 .Trim();
     }
