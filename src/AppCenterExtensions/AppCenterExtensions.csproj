@@ -3,6 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <RootNamespace>ChristianHelle.DeveloperTools.AppCenterExtensions</RootNamespace>
+    <Title>AppCenter Extensions</Title>
+    <Authors>Christian Resma Helle</Authors>
+    <Description>A set of convenience classes and extension methods to simplify Crash Reporting and Analytics using AppCenter</Description>
+    <PackageProjectUrl>https://github.com/christianhelle/appcenterextensions/blob/master/README.md</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/christianhelle/appcenterextensions</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
