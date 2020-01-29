@@ -11,36 +11,14 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
     {
         private static bool appStartReported;
 
-        public TrackingApplication(
-            string appCenterSecrets,
-            bool anonymizeAppCenterUser,
-            IAppCenterSetup appCenterSetup = null)
-        {
-            if (appCenterSecrets == null)
-                throw new ArgumentNullException(nameof(appCenterSecrets));
-
-            StartAppCenterSdk(
-                appCenterSecrets,
-                anonymizeAppCenterUser,
-                appCenterSetup ?? AppCenterSetup.Instance);
-        }
-
-        public TrackingApplication(
-            string appleSecret,
-            string androidSecret,
-            bool anonymizeAppCenterUser,
-            IAppCenterSetup appCenterSetup = null)
-            : this(
-                GetAppCenterSecrets(appleSecret, androidSecret),
-                anonymizeAppCenterUser,
-                appCenterSetup)
-        {
-        }
-
         private static string GetAppCenterSecrets(
             string appleSecret,
             string androidSecret)
-            => $"ios={appleSecret};android={androidSecret}";
+        {
+            if (appleSecret == null) throw new ArgumentNullException(nameof(appleSecret));
+            if (androidSecret == null) throw new ArgumentNullException(nameof(androidSecret));
+            return $"ios={appleSecret};android={androidSecret}";
+        }
 
         public static Stopwatch AppLaunchTime { get; } = Stopwatch.StartNew();
 
@@ -51,6 +29,15 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
             IAppCenterSetup appCenterSetup = null)
             => StartAppCenterSdk(
                 GetAppCenterSecrets(appleSecret, androidSecret),
+                anonymizeAppCenterUser,
+                appCenterSetup);
+
+        public static void Initialize(
+            string secret,
+            bool anonymizeAppCenterUser,
+            IAppCenterSetup appCenterSetup = null)
+            => StartAppCenterSdk(
+                secret,
                 anonymizeAppCenterUser,
                 appCenterSetup);
 

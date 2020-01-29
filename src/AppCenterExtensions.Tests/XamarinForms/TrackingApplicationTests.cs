@@ -13,9 +13,20 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.XamarinForms
     {
         public TrackingApplicationTests() => MockXamarinForms.Init();
 
-        [Fact]
-        public void Requires_AppSecrets()
-            => new Action(() => new TrackingApplication(
+        [Theory, AutoData]
+        public void Requires_ApppleSecret(string secret)
+            => new Action(() => TrackingApplication.Initialize(
+                    null,
+                    secret,
+                    false,
+                    new Mock<IAppCenterSetup>().Object))
+                .Should()
+                .ThrowExactly<ArgumentNullException>();
+
+        [Theory, AutoData]
+        public void Requires_AndroidSecret(string secret)
+            => new Action(() => TrackingApplication.Initialize(
+                    secret,
                     null,
                     false,
                     new Mock<IAppCenterSetup>().Object))
@@ -25,21 +36,21 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.XamarinForms
         [Theory, AutoMoqData]
         public void Invokes_AppCenterSetup_Start(string secrets, IAppCenterSetup appCenterSetup)
         {
-            new TrackingApplication(secrets, false, appCenterSetup);
+            TrackingApplication.Initialize(secrets, false, appCenterSetup);
             Mock.Get(appCenterSetup).Verify(c => c.Start(secrets));
         }
 
         [Theory, AutoMoqData]
         public void Invokes_AppCenterSetup_LogLevel(string secrets, IAppCenterSetup appCenterSetup)
         {
-            new TrackingApplication(secrets, false, appCenterSetup);
+            TrackingApplication.Initialize(secrets, false, appCenterSetup);
             Mock.Get(appCenterSetup).VerifySet(c => c.LogLevel = LogLevel.Verbose);
         }
 
         [Theory, AutoMoqData]
         public void Invokes_AppCenterSetup_AnonymizeUser(string secrets, IAppCenterSetup appCenterSetup)
         {
-            new TrackingApplication(secrets, true, appCenterSetup);
+            TrackingApplication.Initialize(secrets, true, appCenterSetup);
             Mock.Get(appCenterSetup).Verify(c => c.UseAnonymousUserIdAsync());
         }
 
@@ -49,17 +60,6 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.XamarinForms
 
         [Theory, AutoMoqData]
         public void Invokes_AppCenterSetup_Start_For_iOS_Android(
-            string appleSecret,
-            string androidSecret,
-            IAppCenterSetup appCenterSetup)
-        {
-            var appSecrets = $"ios={appleSecret};android={androidSecret}";
-            new TrackingApplication(appleSecret, androidSecret, true, appCenterSetup);
-            Mock.Get(appCenterSetup).Verify(c => c.Start(appSecrets));
-        }
-
-        [Theory, AutoMoqData]
-        public void Initialize_Invokes_Constructor(
             string appleSecret,
             string androidSecret,
             IAppCenterSetup appCenterSetup)
