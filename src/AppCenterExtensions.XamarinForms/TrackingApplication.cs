@@ -46,6 +46,9 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
             bool anonymizeAppCenterUser,
             IAppCenterSetup appCenterSetup)
         {
+            if (appCenterSetup == null)
+                appCenterSetup = AppCenterSetup.Instance;
+
             appCenterSetup.Start(appCenterSecrets);
 
             if (anonymizeAppCenterUser)
