@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AppCenterExtensions.XamarinForms\AppCenterExtensions.XamarinForms.csproj" />
     <ProjectReference Include="..\AppCenterExtensions\AppCenterExtensions.csproj" />
   </ItemGroup>
 </Project>
