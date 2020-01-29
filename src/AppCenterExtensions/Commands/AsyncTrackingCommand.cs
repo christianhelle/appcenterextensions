@@ -55,7 +55,8 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Commands
             if (!CanExecute(parameter))
                 return;
 
-            (CompletionTask = executeFunc.Invoke()).Forget();
+            CompletionTask = executeFunc.Invoke();
+            CompletionTask.Forget();
             
             Properties[nameof(EventName)] = EventName;
             Properties[nameof(ScreenName)] = ScreenName;
