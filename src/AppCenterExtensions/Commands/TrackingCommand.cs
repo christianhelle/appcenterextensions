@@ -48,30 +48,11 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Commands
 
             action();
 
-            Properties[nameof(EventName)] = EventName;
-            Properties[nameof(ScreenName)] = ScreenName;
-
-            if (action.Target != null)
-                Properties["Target"] = action.Target.GetType().Name;
-
-            if (parameter != null)
-            {
-                var parameterType = parameter.GetType().Name;
-                Properties["Parameter"] = parameterType;
-                foreach (var item in parameter.ToDictionary())
-                    Properties[$"{parameterType}-{item.Key}"] = item.Value ?? string.Empty;
-            }
-
-            analytics.TrackEvent(
-                EventName,
-                Properties);
+            this.Report(action, parameter, analytics);
         }
 
         public event EventHandler CanExecuteChanged;
 
-        public void RaiseCanExecuteChanged()
-        {
-            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
-        }
+        public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
     }
 }

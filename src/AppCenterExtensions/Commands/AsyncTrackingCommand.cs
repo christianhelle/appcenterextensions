@@ -26,8 +26,8 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Commands
 
             if (string.IsNullOrWhiteSpace(screenName))
                 throw new ArgumentNullException(nameof(screenName));
-                        
-            if (canExecute != null) 
+
+            if (canExecute != null)
                 this.canExecute = new Func<bool>(canExecute);
 
             EventName = eventName;
@@ -42,12 +42,12 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Commands
         public Dictionary<string, string> Properties { get; }
 
         public Task CompletionTask { get; private set; } = Task.CompletedTask;
-        
+
         public event EventHandler CanExecuteChanged;
 
         public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
 
-        public bool CanExecute(object parameter) 
+        public bool CanExecute(object parameter)
             => canExecute?.Invoke() ?? true;
 
         public void Execute(object parameter)
@@ -57,24 +57,8 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Commands
 
             CompletionTask = executeFunc.Invoke();
             CompletionTask.Forget();
-            
-            Properties[nameof(EventName)] = EventName;
-            Properties[nameof(ScreenName)] = ScreenName;
 
-            if (executeFunc.Target != null)
-                Properties["Target"] = executeFunc.Target.GetType().Name;
-
-            if (parameter != null)
-            {
-                var parameterType = parameter.GetType().Name;
-                Properties["Parameter"] = parameterType;
-                foreach (var item in parameter.ToDictionary())
-                    Properties[$"{parameterType}-{item.Key}"] = item.Value ?? string.Empty;
-            }
-
-            analytics.TrackEvent(
-                EventName,
-                Properties);
+            this.Report(executeFunc, parameter, analytics);
         }
     }
 }
