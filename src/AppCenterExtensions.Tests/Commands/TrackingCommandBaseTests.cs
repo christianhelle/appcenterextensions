@@ -2,6 +2,7 @@
 using FluentAssertions;
 using Moq;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Xunit;
 
@@ -13,7 +14,7 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Commands
         protected const string ScreenName = "Unit Test";
         protected int executeCallCount, canExecuteCallCount;
         protected readonly Mock<IAnalytics> analyticsMock;
-        private readonly ITrackingCommand sut;
+        protected readonly ITrackingCommand sut;
 
         protected TrackingCommandBaseTests()
         {
@@ -71,5 +72,14 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Commands
         [Fact]
         public void TracksEvent()
             => analyticsMock.Verify(c => c.TrackEvent(EventName, sut.Properties));
+
+        [Fact]
+        public void RaiseCanExecuteChanged_Fires_CanExecuteChanged()
+        {
+            var raised = false;
+            sut.CanExecuteChanged += (sender, args) => raised = true;
+            sut.RaiseCanExecuteChanged();
+            raised.Should().BeTrue();
+        }
     }
 }

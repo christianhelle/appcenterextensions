@@ -8,5 +8,6 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Commands
         string EventName { get; }
         string ScreenName { get; }
         Dictionary<string, string> Properties { get; }
+        void RaiseCanExecuteChanged();
     }
 }

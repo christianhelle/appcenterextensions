@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using AutoFixture;
 using ChristianHelle.DeveloperTools.AppCenterExtensions.Http;
+using FluentAssertions;
 using Moq;
 using Xunit;
 
@@ -17,12 +18,27 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Http
         private readonly Uri requestUri = new Fixture().Create<Uri>();
 
         private Task<HttpResponseMessage> Prepare(HttpMessageHandler handler)
-            => new HttpClient(
+        {
+            mockAppCenterSetup
+                .Setup(c => c.GetAppCenterInstallIdAsync())
+                .ReturnsAsync(Guid.NewGuid());
+            
+            return new HttpClient(
                     new DiagnosticDelegatingHandler(
                         handler,
                         mockAnalytics.Object,
                         mockAppCenterSetup.Object))
                 .GetAsync(requestUri);
+        }
+
+        [Fact]
+        public void Supports_NotHaving_InnerHandler()
+            => new DiagnosticDelegatingHandler(
+                    mockAnalytics.Object,
+                    mockAppCenterSetup.Object)
+                .InnerHandler
+                .Should()
+                .BeNull();
 
         [Fact]
         public void TrackEvent_Invoked_For_Failed_Requests_Due_To_Exception()
