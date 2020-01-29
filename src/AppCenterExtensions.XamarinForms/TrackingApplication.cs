@@ -7,7 +7,7 @@ using Microsoft.AppCenter.Analytics;
 
 namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
 {
-    public class TrackingApplication
+    public static class TrackingApplication
     {
         private static bool appStartReported;
 
