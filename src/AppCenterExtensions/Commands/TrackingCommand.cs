@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
 
 namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Commands
 {
