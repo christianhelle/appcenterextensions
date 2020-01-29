@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
@@ -12,6 +12,10 @@
 
     <ItemGroup>
       <PackageReference Include="Xamarin.Forms" Version="4.0.0.425677" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\AppCenterExtensions\AppCenterExtensions.csproj" />
     </ItemGroup>
 
 </Project>
