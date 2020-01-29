@@ -1,7 +1,9 @@
-﻿using Xamarin.Forms.Internals;
+﻿using System.Diagnostics.CodeAnalysis;
+using Xamarin.Forms.Internals;
 
 namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Infrastructure
 {
+    [ExcludeFromCodeCoverage]
     internal class MockTicker : Ticker
     {
         bool _enabled;

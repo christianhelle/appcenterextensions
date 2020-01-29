@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
 using System.Threading;
@@ -8,6 +9,7 @@ using Xamarin.Forms.Internals;
 
 namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Infrastructure
 {
+    [ExcludeFromCodeCoverage]
     internal class MockPlatformServices : IPlatformServices
     {
         private readonly Action<Action> _invokeOnMainThread;

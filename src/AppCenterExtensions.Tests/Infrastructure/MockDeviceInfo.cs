@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Infrastructure
 {
+    [ExcludeFromCodeCoverage]
     internal class MockDeviceInfo : DeviceInfo
     {
         public override Size PixelScreenSize => throw new NotImplementedException();
