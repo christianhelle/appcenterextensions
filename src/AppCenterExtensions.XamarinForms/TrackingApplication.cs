@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
 {
-    public class TrackingApplication : Application
+    public class TrackingApplication
     {
         private static bool appStartReported;
         private readonly IAppCenterSetup appCenterSetup;
@@ -40,6 +40,17 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
         {
         }
 
+        public static void Initialize(
+            string appleSecret,
+            string androidSecret,
+            bool anonymizeAppCenterUser,
+            IAppCenterSetup appCenterSetup = null)
+            => new TrackingApplication(
+                appleSecret,
+                androidSecret,
+                anonymizeAppCenterUser,
+                appCenterSetup);
+
         private void StartAppCenterSdk(
             string appCenterSecrets,
             bool anonymizeAppCenterUser)
@@ -60,7 +71,7 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
             appStartReported = true;
 
             AppLaunchTime.Stop();
-            
+
             Analytics.TrackEvent(
                 "App Startup",
                 new Dictionary<string, string>
