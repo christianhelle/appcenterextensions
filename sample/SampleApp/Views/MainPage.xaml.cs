@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
