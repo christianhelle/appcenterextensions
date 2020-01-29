@@ -24,13 +24,8 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
         {
             base.OnDisappearing();
 
-            Analytics.TrackEvent(
-                GetType().Name.ToTrackingEventName(),
-                new Dictionary<string, string>
-                {
-                    {nameof(Title), Title},
-                    {"Duration", $"{stopwatch?.Elapsed.TotalSeconds}"}
-                });
+            if (stopwatch != null)
+                this.TrackPage(stopwatch.Elapsed);
         }
     }
 }
