@@ -10,4 +10,12 @@
         <RepositoryUrl>https://github.com/christianhelle/appcenterextensions</RepositoryUrl>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Xamarin.Forms" Version="4.0.0.425677" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\AppCenterExtensions\AppCenterExtensions.csproj" />
+    </ItemGroup>
+
 </Project>
