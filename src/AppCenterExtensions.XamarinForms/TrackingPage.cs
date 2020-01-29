@@ -43,7 +43,7 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
         }
 
         private static bool isCalled;
-        private void TrackAppStart()
+        protected void TrackAppStart()
         {
             if (isCalled)
                 return;

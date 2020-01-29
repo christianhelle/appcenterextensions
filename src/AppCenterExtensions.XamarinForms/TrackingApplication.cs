@@ -21,7 +21,7 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
             if (appCenterSecrets == null)
                 throw new ArgumentNullException(nameof(appCenterSecrets));
 
-            this.appCenterSetup = appCenterSetup ?? new AppCenterSetup();
+            this.appCenterSetup = appCenterSetup ?? AppCenterSetup.Instance;
             StartAppCenterSdk(appCenterSecrets, anonymizeAppCenterUser);
         }
 
