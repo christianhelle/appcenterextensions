@@ -10,8 +10,11 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
     {
         public static void TrackPage(this Page page, TimeSpan duration, IAnalytics analytics = null)
         {
-            var properties = page.BindingContext?.ToDictionary() ?? new Dictionary<string, string>();            
-            properties["Duration"] = duration.TotalSeconds.ToString(CultureInfo.InvariantCulture);
+            var properties = new Dictionary<string, string>
+            {
+                [nameof(Page.Title)] = page.Title,
+                ["Duration"] = duration.TotalSeconds.ToString(CultureInfo.InvariantCulture)
+            };
 
             (analytics ?? AppCenterAnalytics.Instance)
                 .TrackEvent(
