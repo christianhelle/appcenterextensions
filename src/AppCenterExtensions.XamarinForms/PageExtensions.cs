@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
-using Microsoft.AppCenter.Analytics;
-using Xamarin.Forms;
+using Page = Xamarin.Forms.Page;
 
 namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
 {

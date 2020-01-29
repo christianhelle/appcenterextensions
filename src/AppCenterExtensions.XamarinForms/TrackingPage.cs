@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
-using Microsoft.AppCenter.Analytics;
 using Xamarin.Forms;
 
 namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms

@@ -2,11 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
-using Microsoft.AppCenter.Crashes;
-using Xamarin.Forms;
 
 namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
 {
@@ -14,7 +11,6 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
     {
         private static bool appStartReported;
         private readonly IAppCenterSetup appCenterSetup;
-        public static Stopwatch AppLaunchTime { get; } = Stopwatch.StartNew();
 
         public TrackingApplication(
             string appCenterSecrets,
@@ -40,16 +36,20 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
         {
         }
 
+        public static Stopwatch AppLaunchTime { get; } = Stopwatch.StartNew();
+
         public static void Initialize(
             string appleSecret,
             string androidSecret,
             bool anonymizeAppCenterUser,
             IAppCenterSetup appCenterSetup = null)
-            => new TrackingApplication(
+        {
+            new TrackingApplication(
                 appleSecret,
                 androidSecret,
                 anonymizeAppCenterUser,
                 appCenterSetup);
+        }
 
         private void StartAppCenterSdk(
             string appCenterSecrets,
