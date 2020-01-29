@@ -11,15 +11,10 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
     public class TrackingContentPage : ContentPage
     {
         private Stopwatch stopwatch;
-        private bool onAppearing, onDisappearing;
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            
-            if (onAppearing)
-                return;
-            onAppearing = true;
             
             stopwatch = Stopwatch.StartNew();
             TrackingApplication.TrackAppStart(GetType().Name.ToTrackingEventName());
@@ -28,10 +23,6 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-
-            if (onDisappearing)
-                return;
-            onDisappearing = true;
             
             Analytics.TrackEvent(
                 GetType().Name.ToTrackingEventName(),
