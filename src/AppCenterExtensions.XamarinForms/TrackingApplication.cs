@@ -10,7 +10,6 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
     public class TrackingApplication
     {
         private static bool appStartReported;
-        private readonly IAppCenterSetup appCenterSetup;
 
         public TrackingApplication(
             string appCenterSecrets,
@@ -20,8 +19,10 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
             if (appCenterSecrets == null)
                 throw new ArgumentNullException(nameof(appCenterSecrets));
 
-            this.appCenterSetup = appCenterSetup ?? AppCenterSetup.Instance;
-            StartAppCenterSdk(appCenterSecrets, anonymizeAppCenterUser);
+            StartAppCenterSdk(
+                appCenterSecrets,
+                anonymizeAppCenterUser,
+                appCenterSetup ?? AppCenterSetup.Instance);
         }
 
         public TrackingApplication(
@@ -30,11 +31,16 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
             bool anonymizeAppCenterUser,
             IAppCenterSetup appCenterSetup = null)
             : this(
-                $"ios={appleSecret};android={androidSecret}",
+                GetAppCenterSecrets(appleSecret, androidSecret),
                 anonymizeAppCenterUser,
                 appCenterSetup)
         {
         }
+
+        private static string GetAppCenterSecrets(
+            string appleSecret,
+            string androidSecret)
+            => $"ios={appleSecret};android={androidSecret}";
 
         public static Stopwatch AppLaunchTime { get; } = Stopwatch.StartNew();
 
@@ -43,17 +49,15 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
             string androidSecret,
             bool anonymizeAppCenterUser,
             IAppCenterSetup appCenterSetup = null)
-        {
-            new TrackingApplication(
-                appleSecret,
-                androidSecret,
+            => StartAppCenterSdk(
+                GetAppCenterSecrets(appleSecret, androidSecret),
                 anonymizeAppCenterUser,
                 appCenterSetup);
-        }
 
-        private void StartAppCenterSdk(
+        private static void StartAppCenterSdk(
             string appCenterSecrets,
-            bool anonymizeAppCenterUser)
+            bool anonymizeAppCenterUser,
+            IAppCenterSetup appCenterSetup)
         {
             appCenterSetup.Start(appCenterSecrets);
 
