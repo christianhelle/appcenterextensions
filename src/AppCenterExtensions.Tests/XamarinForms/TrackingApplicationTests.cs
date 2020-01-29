@@ -46,7 +46,6 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.XamarinForms
         [Fact]
         public void AppLaunchTime_NotNull()
             => TrackingApplication.AppLaunchTime.Should().NotBeNull();
-        
 
         [Theory, AutoMoqData]
         public void Invokes_AppCenterSetup_Start_For_iOS_Android(
@@ -56,6 +55,17 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.XamarinForms
         {
             var appSecrets = $"ios={appleSecret};android={androidSecret}";
             new TrackingApplication(appleSecret, androidSecret, true, appCenterSetup);
+            Mock.Get(appCenterSetup).Verify(c => c.Start(appSecrets));
+        }
+
+        [Theory, AutoMoqData]
+        public void Initialize_Invokes_Constructor(
+            string appleSecret,
+            string androidSecret,
+            IAppCenterSetup appCenterSetup)
+        {
+            var appSecrets = $"ios={appleSecret};android={androidSecret}";
+            TrackingApplication.Initialize(appleSecret, androidSecret, true, appCenterSetup);
             Mock.Get(appCenterSetup).Verify(c => c.Start(appSecrets));
         }
     }

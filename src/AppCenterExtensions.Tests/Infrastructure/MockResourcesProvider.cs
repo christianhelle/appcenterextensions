@@ -1,8 +1,10 @@
-﻿using Xamarin.Forms;
+﻿using System.Diagnostics.CodeAnalysis;
+using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Infrastructure
 {
+    [ExcludeFromCodeCoverage]
     internal class MockResourcesProvider : ISystemResourcesProvider
     {
         public IResourceDictionary GetSystemResources()
