@@ -1,8 +1,8 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using ChristianHelle.DeveloperTools.AppCenterExtensions.Commands;
+using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
 using Microsoft.AppCenter.Crashes;
 using Xamarin.Essentials;
-using Xamarin.Forms;
 
 namespace SampleApp.ViewModels
 {
@@ -11,12 +11,20 @@ namespace SampleApp.ViewModels
         public AboutViewModel()
         {
             Title = "About";
-            OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://xamarin.com"));
-            CrashCommand = new Command(() => Crashes.GenerateTestCrash());
+
+            LearnMoreTappedCommand = new AsyncTrackingCommand(
+                () => Browser.OpenAsync("https://xamarin.com"),
+                nameof(LearnMoreTappedCommand).ToTrackingEventName(),
+                nameof(AboutViewModel).ToTrackingEventName());
+
+            CrashTestTappedCommand = new TrackingCommand(
+                () => Crashes.GenerateTestCrash(),
+                nameof(CrashTestTappedCommand).ToTrackingEventName(),
+                nameof(AboutViewModel).ToTrackingEventName());
         }
 
-        public ICommand OpenWebCommand { get; }
+        public ICommand LearnMoreTappedCommand { get; }
 
-        public ICommand CrashCommand { get; }
+        public ICommand CrashTestTappedCommand { get; }
     }
 }
