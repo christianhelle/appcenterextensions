@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Diagnostics;
+using System.Windows.Input;
 using ChristianHelle.DeveloperTools.AppCenterExtensions.Commands;
 using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
 using Microsoft.AppCenter.Crashes;
@@ -21,10 +23,17 @@ namespace SampleApp.ViewModels
                 () => Crashes.GenerateTestCrash(),
                 nameof(CrashTestTappedCommand).ToTrackingEventName(),
                 nameof(AboutViewModel).ToTrackingEventName());
+
+            ButtonTappedCommand = new TrackingCommand<string>(
+                p => Debug.WriteLine(p),
+                nameof(ButtonTappedCommand).ToTrackingEventName(),
+                nameof(AboutViewModel).ToTrackingEventName());
         }
 
         public ICommand LearnMoreTappedCommand { get; }
 
         public ICommand CrashTestTappedCommand { get; }
+        
+        public ICommand ButtonTappedCommand { get; }
     }
 }
