@@ -26,6 +26,25 @@ TrackingApplication
 ## Anonymous User Information
 
 The component `AppCenterSetup` exposes a method called `UseAnonymousUserIdAsync()` which sets the UserId in AppCenter to the first 8 characters a GUID that is unique per app installation. This can be used as a **support key** for uniquely identifying application users for instrumentation and troubleshooting
+
+## Error Reporting
+
+The library exposes extension methods to the `Exception` class for conveniently reporting Exceptions to AppCenter
+
+Example:
+
+```
+try
+{
+    // Something that blows up
+    explosives.Detonate();
+}
+catch (Exception e)
+{
+    // Safely handle error then report
+    e.Report();
+}
+```
 ```
 
 ## ITrackingCommand
