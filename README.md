@@ -16,10 +16,16 @@ A set of convenience classes and extension methods to simplify Crash Reporting a
 This library is configured almost the same way as the AppCenter SDK. You provide the AppCenter secrets, and specify whether to anonymize the user information
 
 ```
-TrackingApplication.Initialize(
-    "[iOS AppCenter secret]",
-    "[Android AppCenter secret]",
-    anonymizeAppCenterUser: true);
+TrackingApplication
+    .Initialize(
+        "[iOS AppCenter secret]",
+        "[Android AppCenter secret]",
+        anonymizeAppCenterUser: true);
+```
+
+## Anonymous User Information
+
+The component `AppCenterSetup` exposes a method called `UseAnonymousUserIdAsync()` which sets the UserId in AppCenter to the first 8 characters a GUID that is unique per app installation. This can be used as a **support key** for uniquely identifying application users for instrumentation and troubleshooting
 ```
 
 ## ITrackingCommand
