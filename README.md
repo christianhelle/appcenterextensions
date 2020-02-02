@@ -5,6 +5,23 @@
 # AppCenterExtensions
 A set of convenience classes and extension methods to simplify Crash Reporting and Analytics using AppCenter
 
+## Features
+- User interaction reporting using `ICommand` implementations
+- Automatic page tracking in **Xamarin.Forms** including time spent on screen
+- Extension methods for crash reporting
+- Anonymous user information configuration
+
+## Getting Started
+
+This library is configured almost the same way as the AppCenter SDK. You provide the AppCenter secrets, and specify whether to anonymize the user information
+
+```
+TrackingApplication.Initialize(
+    "[iOS AppCenter secret]",
+    "[Android AppCenter secret]",
+    anonymizeAppCenterUser: true);
+```
+
 ## ITrackingCommand
 
 This library provides 3 convenience implementations of `ICommand` that will report the action to AppCenter Analytics after successfully invoking the execute callback method
