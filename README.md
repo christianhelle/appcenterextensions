@@ -45,6 +45,17 @@ catch (Exception e)
     e.Report();
 }
 ```
+
+## HTTP Error Logging
+
+The library provides a `HttpMessageHandler` implementation that logs non-successfuly HTTP results to AppCenter Analytics. This component will also attach HTTP headers describing the AppCenter SDK Version, Install ID, and a support key to all HTTP requests. The logged failed responses will contain the Endpoint URL (including the HTTP verb), Response status code, how the duration of the HTTP call. This will be logged under the event name **HTTP Error**
+
+You will in most (if not all) cases would want to keep a singleton instance of the `HttpClient`. The `DiagnosticDelegatingHandler` is designed with unit testing in mind and accepts an `IAnalytics` and `IAppCenterSetup` interface, it also accepts an inner `HttpMessageHandler` if you wish to chain multiple delegating handlers.
+
+Example:
+
+```
+var httpClient = new HttpClient(new DiagnosticDelegatingHandler());
 ```
 
 ## ITrackingCommand
