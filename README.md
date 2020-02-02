@@ -75,3 +75,32 @@ namespace SampleApp.ViewModels
     }
 }
 ```
+
+## Automatic Page Tracking
+
+Automatic page tracking is enabled by replacing the base class of the `ContentPage` to classes to use `TrackingContentPage` class. By doing so the library will send page tracking information to AppCenter after leaving every page. Currently, the library will send the page Type, Title, and the duration spent on the screen. The library is rather opinionated on how to log information, and this will only change if I get a request to do so. Duration spent on screen is calculated using a `Stopwatch` that is started upon Page `OnAppearing` and is reported to Analytics upon `OnDisappearing`. The event name is based on the `Type` name of the `Page` and is split into multiple words based on pascal case rules and afterwards removes words like `Page`, `View`, `Model`, `Async`. For example: `UserSettingsPage` or `UserSettingsView` becomes **User Settings**
+
+XAML Example:
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+
+<ext:TrackingContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ext="clr-namespace:ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms;assembly=AppCenterExtensions.XamarinForms"
+    mc:Ignorable="d" 
+    x:Class="SampleApp.Views.ItemDetailPage" 
+    Title="{Binding Title}">
+
+    <StackLayout Spacing="20" Padding="15">
+        <Label Text="Text:" FontSize="Medium" />
+        <Label Text="{Binding Item.Text}" d:Text="Item name" FontSize="Small" />
+        <Label Text="Description:" FontSize="Medium" />
+        <Label Text="{Binding Item.Description}" d:Text="Item description" FontSize="Small" />
+    </StackLayout>
+
+</ext:TrackingContentPage>
+```
