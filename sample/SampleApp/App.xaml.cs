@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using SampleApp.Services;
 using SampleApp.Views;
+using ChristianHelle.DeveloperTools.AppCenterExtensions;
 
 namespace SampleApp
 {
@@ -9,7 +10,7 @@ namespace SampleApp
     {
         public App()
         {
-            TrackingApplication.Initialize(
+            AppCenterSetup.Instance.Start(
                 "9f8ed7ec-e9d8-4de2-8909-e9a01493c006",
                 "cd665281-8d72-4e4e-bce9-bca552776eb5",
                 true);
