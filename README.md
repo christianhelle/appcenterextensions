@@ -23,6 +23,7 @@ This library is configured almost the same way as the AppCenter SDK. You provide
 
 ```
 AppCenterSetup
+    .Instance
     .Start(
         "[iOS AppCenter secret]",
         "[Android AppCenter secret]",
@@ -33,6 +34,7 @@ or
 
 ```
 await AppCenterSetup
+    .Instance
     .StartAsync(
         "[iOS AppCenter secret]",
         "[Android AppCenter secret]",
