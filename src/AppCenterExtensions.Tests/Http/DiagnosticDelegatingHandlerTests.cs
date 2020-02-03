@@ -32,13 +32,13 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Http
         }
 
         [Fact]
-        public void Supports_NotHaving_InnerHandler()
+        public void Supports_Default_InnerHandler_Is_HttpClientHandler()
             => new DiagnosticDelegatingHandler(
                     mockAnalytics.Object,
                     mockAppCenterSetup.Object)
                 .InnerHandler
                 .Should()
-                .BeNull();
+                .BeOfType<HttpClientHandler>();
 
         [Fact]
         public void TrackEvent_Invoked_For_Failed_Requests_Due_To_Exception()
