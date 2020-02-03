@@ -22,23 +22,19 @@ This library is distributed as 2 nuget packages
 This library is configured almost the same way as the AppCenter SDK. You provide the AppCenter secrets, and specify whether to anonymize the user information. Both Crash Reporting and Analytics are **always** enabled when using `AppCenterSetup`.
 
 ```
-AppCenterSetup
-    .Instance
-    .Start(
-        "[iOS AppCenter secret]",
-        "[Android AppCenter secret]",
-        anonymizeAppCenterUser: true);
+AppCenterSetup.Instance.Start(
+    "[iOS AppCenter secret]",
+    "[Android AppCenter secret]",
+    anonymizeAppCenterUser: true);
 ```
 
 or
 
 ```
-await AppCenterSetup
-    .Instance
-    .StartAsync(
-        "[iOS AppCenter secret]",
-        "[Android AppCenter secret]",
-        anonymizeAppCenterUser: true);
+await AppCenterSetup.Instance.StartAsync(
+    "[iOS AppCenter secret]",
+    "[Android AppCenter secret]",
+    anonymizeAppCenterUser: true);
 ```
 
 The reason for the `async` API here is because `anonymizeAppCenterUser` internally relies on an `async` API. The synchronize API's for starting AppCenter are non-blocking methods that do a fire-and-forget call to `StartAsync(string,bool)`.
