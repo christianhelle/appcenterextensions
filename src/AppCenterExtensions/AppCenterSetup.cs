@@ -12,8 +12,8 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions
     public interface IAppCenterSetup
     {
         void Start(string appleSecret, string androidSecret, bool anonymizeUser = false);
-        Task StartAsync(string appleSecret, string androidSecret, bool anonymizeUser = false);
         void Start(string appSecret, bool anonymizeUser = false);
+        Task StartAsync(string appleSecret, string androidSecret, bool anonymizeUser = false);
         Task StartAsync(string appSecret, bool anonymizeUser = false);
         Task UseAnonymousUserIdAsync();
         Task<string> GetSupportKeyAsync();
@@ -32,11 +32,11 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions
         public void Start(string appleSecret, string androidSecret, bool anonymizeUser = false)
             => Start(GetSecrets(appleSecret, androidSecret), anonymizeUser);
 
-        public Task StartAsync(string appleSecret, string androidSecret, bool anonymizeUser = false)
-            => StartAsync(GetSecrets(appleSecret, androidSecret), anonymizeUser);
-
         public void Start(string appSecret, bool anonymizeUser = false)
             => StartAsync(appSecret, anonymizeUser).Forget();
+
+        public Task StartAsync(string appleSecret, string androidSecret, bool anonymizeUser = false)
+            => StartAsync(GetSecrets(appleSecret, androidSecret), anonymizeUser);
 
         public async Task StartAsync(string appSecret, bool anonymizeUser = false)
         {
