@@ -16,6 +16,7 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Http
         public DiagnosticDelegatingHandler(
             IAnalytics analytics = null,
             IAppCenterSetup appCenterSetup = null)
+            : base(new HttpClientHandler())
         {
             this.analytics = analytics ?? new AppCenterAnalytics();
             this.appCenterSetup = appCenterSetup ?? AppCenterSetup.Instance;
