@@ -10,8 +10,6 @@ namespace SampleApp
 {
     public partial class App : Application
     {
-        private static readonly Stopwatch stopwatch = Stopwatch.StartNew();
-
         public App()
         {
             AppCenterSetup.Instance.Start(
