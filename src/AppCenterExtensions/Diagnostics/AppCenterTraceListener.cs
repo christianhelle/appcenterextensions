@@ -20,16 +20,16 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Diagnostics
         {
         }
 
-        [ExcludeFromCodeCoverage]
-        public override void WriteLine(string message)
-        {
-        }
-
         public override void Write(object o)
             => WriteInternal(o);
 
         public override void Write(object o, string category)
             => WriteInternal(o);
+
+        [ExcludeFromCodeCoverage]
+        public override void WriteLine(string message)
+        {
+        }
 
         public override void WriteLine(object o)
             => WriteInternal(o);
