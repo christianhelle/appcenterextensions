@@ -19,23 +19,19 @@ namespace SampleApp.ViewModels
 
             LearnMoreTappedCommand = new AsyncTrackingCommand(
                 () => Browser.OpenAsync("https://xamarin.com"),
-                nameof(LearnMoreTappedCommand).ToTrackingEventName(),
-                nameof(AboutViewModel).ToTrackingEventName());
+                nameof(LearnMoreTappedCommand).ToTrackingEventName());
 
             CrashTestTappedCommand = new TrackingCommand(
                 () => Crashes.GenerateTestCrash(),
-                nameof(CrashTestTappedCommand).ToTrackingEventName(),
-                nameof(AboutViewModel).ToTrackingEventName());
+                nameof(CrashTestTappedCommand).ToTrackingEventName());
 
             ButtonTappedCommand = new TrackingCommand<string>(
                 p => Debug.WriteLine(p),
-                nameof(ButtonTappedCommand).ToTrackingEventName(),
-                nameof(AboutViewModel).ToTrackingEventName());
+                nameof(ButtonTappedCommand).ToTrackingEventName());
 
             OpenBadUrlTappedCommand = new AsyncTrackingCommand(
                 OpenNotFoundUrl,
-                nameof(OpenBadUrlTappedCommand).ToTrackingEventName(),
-                nameof(AboutViewModel).ToTrackingEventName());
+                nameof(OpenBadUrlTappedCommand).ToTrackingEventName());
         }
 
         public ICommand LearnMoreTappedCommand { get; }
