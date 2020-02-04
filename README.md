@@ -128,6 +128,8 @@ namespace SampleApp.ViewModels
 }
 ```
 
+Specifying the `screenName` argument in the constructor is optional and when this is not provided manually then it will use the declaring `Type` name from the method that instantiated the `ITrackingCommand` instance and convert it to a more analytics friendly event name using the `ToTrackingEventName()` extension method. In the example above, if the `nameof(AboutViewModel).ToTrackingEventName()` parameter is not provided then the owner declaring Type is `AboutViewModel` and the `ScreenName` will be set to `"About"`
+
 ## Automatic Page Tracking
 
 Automatic page tracking is enabled by replacing the base class of the `ContentPage` to classes to use `TrackingContentPage` class. By doing so the library will send page tracking information to AppCenter after leaving every page. Currently, the library will send the page Type, Title, and the duration spent on the screen. The library is rather opinionated on how to log information, and this will only change if I get a request to do so. Duration spent on screen is calculated using a `Stopwatch` that is started upon Page `OnAppearing` and is reported to Analytics upon `OnDisappearing`. The event name is based on the `Type` name of the `Page` and is split into multiple words based on pascal case rules and afterwards removes words like `Page`, `View`, `Model`, `Async`. For example: `UserSettingsPage` or `UserSettingsView` becomes **User Settings**
