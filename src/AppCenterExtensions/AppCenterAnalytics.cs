@@ -1,8 +1,8 @@
-﻿using Microsoft.AppCenter.Analytics;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.AppCenter.Analytics;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions
+namespace AppCenterExtensions
 {
     [ExcludeFromCodeCoverage]
     public class AppCenterAnalytics : IAnalytics

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Commands
+namespace AppCenterExtensions.Commands
 {
     public class TrackingCommand<T> : TrackingCommandBase
     {

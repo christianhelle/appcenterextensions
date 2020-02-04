@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
+using AppCenterExtensions.Diagnostics;
+using AppCenterExtensions.Tests.Infrastructure;
 using AutoFixture.Xunit2;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Diagnostics;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Infrastructure;
 using FluentAssertions;
 using Xunit;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Diagnostics
+namespace AppCenterExtensions.Tests.Diagnostics
 {
     public class AnalyticsEventTests
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AppCenter.Crashes;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions
+namespace AppCenterExtensions
 {
     [ExcludeFromCodeCoverage]
     public class AppCenterCrashes : ICrashes

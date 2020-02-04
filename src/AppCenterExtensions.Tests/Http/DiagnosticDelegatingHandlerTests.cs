@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using AppCenterExtensions.Http;
 using AutoFixture;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Http;
 using FluentAssertions;
 using Moq;
 using Xunit;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Http
+namespace AppCenterExtensions.Tests.Http
 {
     public class DiagnosticDelegatingHandlerTests
     {

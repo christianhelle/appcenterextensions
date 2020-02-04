@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
+using AppCenterExtensions.Extensions;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Commands
+namespace AppCenterExtensions.Commands
 {
     public abstract class TrackingCommandBase : ITrackingCommand
     {

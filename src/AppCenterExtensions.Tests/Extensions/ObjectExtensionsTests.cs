@@ -1,10 +1,10 @@
 ﻿using System.Runtime.Serialization;
+using AppCenterExtensions.Extensions;
 using AutoFixture.Xunit2;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
 using FluentAssertions;
 using Xunit;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Extensions
+namespace AppCenterExtensions.Tests.Extensions
 {
     public class ObjectExtensionsTests
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions
+namespace AppCenterExtensions
 {
     public class AppCenterSecretsBuilder
     {

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 #pragma warning disable AvoidAsyncVoid // Avoid async void
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions
+namespace AppCenterExtensions.Extensions
 {
     [ExcludeFromCodeCoverage]
     public static class TaskExtensions

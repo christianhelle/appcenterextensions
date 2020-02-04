@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions
+namespace AppCenterExtensions
 {
     public interface IAnalytics
     {

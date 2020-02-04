@@ -1,14 +1,12 @@
 using System;
-using System.Diagnostics;
+using AppCenterExtensions.Tests.Infrastructure;
+using AppCenterExtensions.XamarinForms;
 using AutoFixture.Xunit2;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Infrastructure;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms;
 using FluentAssertions;
-using Microsoft.AppCenter;
 using Moq;
 using Xunit;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.XamarinForms
+namespace AppCenterExtensions.Tests.XamarinForms
 {
     public class TrackingApplicationTests
     {

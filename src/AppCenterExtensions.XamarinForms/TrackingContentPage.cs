@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
+using AppCenterExtensions.Extensions;
 using Xamarin.Forms;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
+namespace AppCenterExtensions.XamarinForms
 {
     [ExcludeFromCodeCoverage]
     public class TrackingContentPage : ContentPage

@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Http
+namespace AppCenterExtensions.Tests.Http
 {
     public class FailingDelegatingHandler : HttpMessageHandler
     {

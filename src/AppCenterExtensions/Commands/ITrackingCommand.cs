@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Commands
+namespace AppCenterExtensions.Commands
 {
     public interface ITrackingCommand : ICommand
     {

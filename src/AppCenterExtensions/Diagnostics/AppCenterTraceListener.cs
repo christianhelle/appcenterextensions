@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Diagnostics
+namespace AppCenterExtensions.Diagnostics
 {
     public class AppCenterTraceListener : TraceListener
     {

@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Xamarin.Forms.Internals;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Infrastructure
+namespace AppCenterExtensions.Tests.Infrastructure
 {
     [ExcludeFromCodeCoverage]
     internal class MockDeserializer : IDeserializer

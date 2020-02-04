@@ -2,12 +2,12 @@ using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
+using AppCenterExtensions.Extensions;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions
+namespace AppCenterExtensions
 {
     public interface IAppCenterSetup
     {

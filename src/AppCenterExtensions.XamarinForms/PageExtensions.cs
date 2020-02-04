@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
+using AppCenterExtensions.Extensions;
 using Page = Xamarin.Forms.Page;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
+namespace AppCenterExtensions.XamarinForms
 {
     public static class PageExtensions
     {

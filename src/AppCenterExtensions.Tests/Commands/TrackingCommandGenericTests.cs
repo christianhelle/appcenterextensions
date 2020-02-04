@@ -1,10 +1,10 @@
-﻿using ChristianHelle.DeveloperTools.AppCenterExtensions.Commands;
-using System;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
+﻿using System;
+using AppCenterExtensions.Commands;
+using AppCenterExtensions.Extensions;
 using FluentAssertions;
 using Xunit;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Commands
+namespace AppCenterExtensions.Tests.Commands
 {
     public sealed class TrackingCommandGenericTests : TrackingCommandBaseTests
     {

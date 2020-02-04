@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Diagnostics
+namespace AppCenterExtensions.Diagnostics
 {
     public class AnalyticsEvent
     {

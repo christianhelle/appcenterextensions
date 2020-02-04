@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AppCenter.Crashes;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions
+namespace AppCenterExtensions
 {
     public interface ICrashes
     {

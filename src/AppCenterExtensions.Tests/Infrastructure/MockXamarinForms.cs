@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Infrastructure
+namespace AppCenterExtensions.Tests.Infrastructure
 {
     public static class MockXamarinForms
     {

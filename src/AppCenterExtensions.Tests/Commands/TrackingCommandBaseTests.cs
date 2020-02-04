@@ -1,12 +1,11 @@
-﻿using ChristianHelle.DeveloperTools.AppCenterExtensions.Commands;
+﻿using System;
+using System.Linq;
+using AppCenterExtensions.Commands;
 using FluentAssertions;
 using Moq;
-using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using Xunit;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Commands
+namespace AppCenterExtensions.Tests.Commands
 {
     public abstract class TrackingCommandBaseTests
     {

@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AppCenter.Crashes;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions
+namespace AppCenterExtensions.Extensions
 {
     [ExcludeFromCodeCoverage]
     public static class ExceptionExtensions

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
+using AppCenterExtensions.Extensions;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Commands
+namespace AppCenterExtensions.Commands
 {
     public class AsyncTrackingCommand : TrackingCommandBase
     {

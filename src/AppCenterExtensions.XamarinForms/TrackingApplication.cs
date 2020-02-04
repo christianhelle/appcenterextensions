@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AppCenter.Analytics;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms
+namespace AppCenterExtensions.XamarinForms
 {
     public static class TrackingApplication
     {

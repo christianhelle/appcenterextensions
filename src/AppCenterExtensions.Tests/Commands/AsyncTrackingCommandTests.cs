@@ -1,13 +1,11 @@
-﻿using ChristianHelle.DeveloperTools.AppCenterExtensions.Commands;
-using Moq;
-using System;
+﻿using System;
 using System.Threading.Tasks;
-using System.Transactions;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
+using AppCenterExtensions.Commands;
+using AppCenterExtensions.Extensions;
 using FluentAssertions;
 using Xunit;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Commands
+namespace AppCenterExtensions.Tests.Commands
 {
     public sealed class AsyncTrackingCommandTests : TrackingCommandBaseTests
     {

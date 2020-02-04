@@ -1,8 +1,8 @@
-﻿using FluentAssertions;
+﻿using AppCenterExtensions.Extensions;
+using FluentAssertions;
 using Xunit;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Extensions
+namespace AppCenterExtensions.Tests.Extensions
 {
     public class StringExtensionsTests
     {

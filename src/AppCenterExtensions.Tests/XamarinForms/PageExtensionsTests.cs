@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Infrastructure;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms;
+using AppCenterExtensions.Extensions;
+using AppCenterExtensions.Tests.Infrastructure;
+using AppCenterExtensions.XamarinForms;
 using Moq;
 using Xamarin.Forms;
 using Xunit;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.XamarinForms
+namespace AppCenterExtensions.Tests.XamarinForms
 {
     public class PageExtensionsTests
     {

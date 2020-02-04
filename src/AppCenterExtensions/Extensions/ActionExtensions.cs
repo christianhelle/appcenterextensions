@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions
+namespace AppCenterExtensions.Extensions
 {
     public static class ActionExtensions
     {

@@ -1,9 +1,9 @@
 using System;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Infrastructure;
+using AppCenterExtensions.Tests.Infrastructure;
 using FluentAssertions;
 using Xunit;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests
+namespace AppCenterExtensions.Tests
 {
     public class AppCenterSecretsBuilderTests
     {

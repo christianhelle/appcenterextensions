@@ -1,7 +1,7 @@
 ﻿using AutoFixture;
 using AutoFixture.Xunit2;
 
-namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Infrastructure
+namespace AppCenterExtensions.Tests.Infrastructure
 {
     public class AutoMoqDataAttribute : AutoDataAttribute
     {
