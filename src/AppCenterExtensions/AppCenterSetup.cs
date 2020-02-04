@@ -9,35 +9,45 @@ using Microsoft.AppCenter.Crashes;
 
 namespace AppCenterExtensions
 {
-    public interface IAppCenterSetup
-    {
-        void Start(string appleSecret, string androidSecret, bool anonymizeUser = false);
-        void Start(string appSecret, bool anonymizeUser = false);
-        Task StartAsync(string appleSecret, string androidSecret, bool anonymizeUser = false);
-        Task StartAsync(string appSecret, bool anonymizeUser = false);
-        Task UseAnonymousUserIdAsync();
-        Task<string> GetSupportKeyAsync();
-
-        string AppCenterSdkVersion { get; }
-        Task<Guid?> GetAppCenterInstallIdAsync();
-        LogLevel LogLevel { get; set; }
-    }
-
+    /// <inheritdoc />
     [ExcludeFromCodeCoverage]
     public sealed class AppCenterSetup : IAppCenterSetup
     {
         private static readonly Lazy<AppCenterSetup> LazyInstance = new Lazy<AppCenterSetup>();
+        
+        /// <summary>
+        /// Singleton default instance
+        /// </summary>
         public static AppCenterSetup Instance => LazyInstance.Value;
 
+        /// <summary>
+        /// Start AppCenter Crash Reporting and Analytics
+        /// </summary>
+        /// <param name="appleSecret">iOS secret</param>
+        /// <param name="androidSecret">Android secret</param>
+        /// <param name="anonymizeUser">Set to TRUE to use a 8 character unique key as the UserId</param>
         public void Start(string appleSecret, string androidSecret, bool anonymizeUser = false)
             => Start(GetSecrets(appleSecret, androidSecret), anonymizeUser);
 
         public void Start(string appSecret, bool anonymizeUser = false)
             => StartAsync(appSecret, anonymizeUser).Forget();
 
+        /// <summary>
+        /// Start AppCenter Crash Reporting and Analytics
+        /// </summary>
+        /// <param name="appleSecret">iOS secret</param>
+        /// <param name="androidSecret">Android secret</param>
+        /// <param name="anonymizeUser">Set to TRUE to use a 8 character unique key as the UserId</param>
+        /// <returns>An awaitable task</returns>
         public Task StartAsync(string appleSecret, string androidSecret, bool anonymizeUser = false)
             => StartAsync(GetSecrets(appleSecret, androidSecret), anonymizeUser);
 
+        /// <summary>
+        /// Start AppCenter Crash Reporting and Analytics
+        /// </summary>
+        /// <param name="appSecret">AppCenter secrets for all supported platforms</param>
+        /// <param name="anonymizeUser">Set to TRUE to use a 8 character unique key as the UserId</param>
+        /// <returns>An awaitable task</returns>
         public async Task StartAsync(string appSecret, bool anonymizeUser = false)
         {
             AppCenter.Start(
@@ -52,19 +62,39 @@ namespace AppCenterExtensions
                 await UseAnonymousUserIdAsync();
         }
 
+        /// <summary>
+        /// Uses an 8 character unique key as the UserId. This is based on the AppCenter Install ID
+        /// </summary>
+        /// <returns>An awaitable task</returns>
         public async Task UseAnonymousUserIdAsync()
             => AppCenter.SetUserId(
                 await GetSupportKeyAsync());
 
+        /// <summary>
+        /// Returns an 8 character unique key. This is designed to be used as an anonymous User ID
+        /// </summary>
+        /// <returns></returns>
         public async Task<string> GetSupportKeyAsync()
             => (await AppCenter.GetInstallIdAsync() ?? Guid.NewGuid())
                 .ToString()
                 .Substring(0, 8);
 
+        /// <summary>
+        /// Gets the AppCenter SDK Version
+        /// </summary>
         public string AppCenterSdkVersion => AppCenter.SdkVersion;
 
+        /// <summary>
+        ///     Get the unique installation identifier for this application installation on this device.
+        /// </summary>
+        /// <remarks>
+        ///     The identifier is lost if clearing application data or uninstalling application.
+        /// </remarks>
         public Task<Guid?> GetAppCenterInstallIdAsync() => AppCenter.GetInstallIdAsync();
 
+        /// <summary>
+        /// This property controls the amount of logs emitted by the SDK.
+        /// </summary>
         public LogLevel LogLevel
         {
             get => AppCenter.LogLevel;
