@@ -1,8 +1,8 @@
 ﻿using Xamarin.Forms;
 using SampleApp.Services;
 using SampleApp.Views;
-using ChristianHelle.DeveloperTools.AppCenterExtensions;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Diagnostics;
+using AppCenterExtensions;
+using AppCenterExtensions.Diagnostics;
 using System.Diagnostics;
 using System.Collections.Generic;
 

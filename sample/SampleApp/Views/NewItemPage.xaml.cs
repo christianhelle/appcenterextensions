@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms;
+using AppCenterExtensions.XamarinForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

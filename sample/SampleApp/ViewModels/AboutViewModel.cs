@@ -3,9 +3,9 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Commands;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Http;
+using AppCenterExtensions.Commands;
+using AppCenterExtensions.Extensions;
+using AppCenterExtensions.Http;
 using Microsoft.AppCenter.Crashes;
 using Xamarin.Essentials;
 
