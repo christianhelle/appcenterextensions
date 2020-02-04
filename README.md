@@ -156,3 +156,92 @@ XAML Example:
 
 </ext:TrackingContentPage>
 ```
+
+## Custom Trace Listener
+
+This library includes a trace listener implementation that reports to AppCenter. The reason for this is to cater to those who have implemented error handling or reporting using Trace Listeners, these types of users can just swap out (or add on) the `AppCenterTraceListener`
+
+This implementation implements the following methods:
+- `Write(object obj)`
+- `Write(object obj, string category)`
+- `WriteLine(object obj)`
+- `WriteLine(object obj, string category)`
+
+If the `object` provided is an `Exception` then this is reported to AppCenter Crash Reporting. If the `object` provided is an instance of `AnalyticsEvent` then this is sent to AppCenter Analytics
+
+The `AnalyticsEvent` exposes 2 properties:
+- `string EventName { get; }` - self explanatory
+- `IDictionary<string,string> Properties { get; }` - Additional properties to attach to the Analytics event
+
+To set it up you simply add an instance of `AppCenterTraceListener` to your existing Trace listeners:
+
+```
+Trace.Listeners.Add(new AppCenterTraceListener());
+```
+
+Here's an example of how to use `System.Diagnostics.Trace` to report errors
+
+```
+try
+{
+    // Something that blows up
+    explosives.Detonate();
+}
+catch (Exception e)
+{
+    // Safely handle error then report
+    Trace.Write(e);
+
+    // or
+    Trace.Write(e, "Error");
+
+    // or
+    Trace.WriteLine(e);
+
+    // or
+    Trace.WriteLine(e, "Error");
+}
+```
+
+and here's an example of to use `System.Diagnostics.Trace` to send analytics data
+
+```
+public partial class App : Application
+{
+    private const string StateKey = "State";
+
+    public App()
+    {
+        // Some initialization code ...
+
+        Trace.Listeners.Add(new AppCenterTraceListener());
+    }
+
+    protected override void OnStart()
+        => Trace.Write(
+            new AnalyticsEvent(
+                nameof(Application),
+                new Dictionary<string, string>
+                {
+                    { StateKey, nameof(OnStart) }
+                }));
+
+    protected override void OnSleep()
+        => Trace.Write(
+            new AnalyticsEvent(
+                nameof(Application),
+                new Dictionary<string, string>
+                {
+                    { StateKey, nameof(OnSleep) }
+                }));
+
+    protected override void OnResume()
+        => Trace.Write(
+            new AnalyticsEvent(
+                nameof(Application),
+                new Dictionary<string, string>
+                {
+                    { StateKey, nameof(OnResume) }
+                }));
+}
+```
