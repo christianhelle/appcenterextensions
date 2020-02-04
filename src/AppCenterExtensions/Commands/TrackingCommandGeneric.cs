@@ -11,7 +11,7 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Commands
         public TrackingCommand(
             Action<T> action,
             string eventName,
-            string screenName,
+            string screenName = null,
             Func<T, bool> canExecute = null,
             Dictionary<string, string> properties = null,
             IAnalytics analytics = null)

@@ -3,6 +3,7 @@ using Moq;
 using System;
 using System.Threading.Tasks;
 using System.Transactions;
+using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
 using FluentAssertions;
 using Xunit;
 
@@ -81,18 +82,17 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Commands
         }
 
         [Fact]
-        public void Requires_ScreenName()
+        public void Takes_CallerType_If_ScreenName_Null()
         {
-            new Action(
-                    () =>
-                        new AsyncTrackingCommand(
-                            func,
-                            EventName,
-                            null,
-                            null,
-                            analytics: analyticsMock.Object))
+            new AsyncTrackingCommand(
+                    func,
+                    EventName,
+                    null,
+                    null,
+                    analytics: analyticsMock.Object)
+                .ScreenName
                 .Should()
-                .ThrowExactly<ArgumentNullException>();
+                .Be(GetType().Name.ToTrackingEventName());
         }
     }
 }

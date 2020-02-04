@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
 
 namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Commands
@@ -18,10 +21,23 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Commands
         {
             this.action = action ?? throw new ArgumentNullException(nameof(action));
             EventName = eventName ?? throw new ArgumentNullException(nameof(eventName));
-            ScreenName = screenName ?? throw new ArgumentNullException(nameof(screenName));
+            ScreenName = screenName ?? GetCallerType().Name.ToTrackingEventName();
 
             Properties = properties ?? new Dictionary<string, string>();
             this.analytics = analytics ?? AppCenterAnalytics.Instance;
+        }
+
+        private Type GetCallerType()
+        {
+            var stackTrace = new StackTrace();
+            var stackFrames = stackTrace.GetFrames();
+            var declaringTypes = stackFrames?.Select(frame => frame?.GetMethod()?.DeclaringType)?.ToList();
+            var callerType = declaringTypes?.FirstOrDefault(
+                t =>
+                    t != GetType() &&
+                    t.BaseType != typeof(TrackingCommandBase) &&
+                    !t.GetTypeInfo().IsAssignableFrom(GetType()));
+            return callerType;
         }
 
         protected abstract bool OnCanExecute(object parameter);

@@ -26,7 +26,7 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions
                 (current, trimName) => current.Replace(
                     trimName, string.Empty));
 
-            return str.Trim();
+            return str.Replace("  ", " ").Trim();
         }
     }
 }

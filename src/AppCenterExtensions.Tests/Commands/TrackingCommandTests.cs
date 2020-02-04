@@ -1,6 +1,7 @@
 ﻿using ChristianHelle.DeveloperTools.AppCenterExtensions.Commands;
 using System;
 using System.Threading.Tasks;
+using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
 using FluentAssertions;
 using Xunit;
 
@@ -10,7 +11,7 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Commands
     {
         private Action action;
         private Func<bool> canExecute;
-        
+
         protected override void OnSetup(out ITrackingCommand sut)
         {
             action = () => executeCallCount++;
@@ -76,18 +77,17 @@ namespace ChristianHelle.DeveloperTools.AppCenterExtensions.Tests.Commands
         }
 
         [Fact]
-        public void Requires_ScreenName()
+        public void Takes_CallerType_If_ScreenName_Null()
         {
-            new Action(
-                    () =>
-                        new TrackingCommand(
-                            action,
-                            EventName,
-                            null,
-                            null,
-                            analytics: analyticsMock.Object))
+            new TrackingCommand(
+                    action,
+                    EventName,
+                    null,
+                    null,
+                    analytics: analyticsMock.Object)
+                .ScreenName
                 .Should()
-                .ThrowExactly<ArgumentNullException>();
+                .Be(GetType().Name.ToTrackingEventName());
         }
     }
 }
