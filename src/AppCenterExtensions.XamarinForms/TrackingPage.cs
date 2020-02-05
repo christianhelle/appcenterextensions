@@ -5,11 +5,16 @@ using Xamarin.Forms;
 
 namespace AppCenterExtensions.XamarinForms
 {
+    /// <summary>
+    /// An extension of Page with automatic page tracking to AppCenter Analytics
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public class TrackingPage : Page
     {
         private Stopwatch stopwatch;
 
+        /// <summary>When overridden, allows application developers to customize behavior immediately prior to the <see cref="T:Xamarin.Forms.Page" /> becoming visible.</summary>
+        /// <remarks>To be added.</remarks>
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -18,6 +23,8 @@ namespace AppCenterExtensions.XamarinForms
             TrackingApplication.TrackAppStart(GetType().Name.ToTrackingEventName());
         }
 
+        /// <summary>When overridden, allows the application developer to customize behavior as the <see cref="T:Xamarin.Forms.Page" /> disappears.</summary>
+        /// <remarks>To be added.</remarks>
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
