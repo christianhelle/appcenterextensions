@@ -28,8 +28,7 @@ namespace AppCenterExtensions.Extensions
         {
             try
             {
-                if (task != null)
-                    await task.ConfigureAwait(false);
+                await task.ConfigureAwait(false);
             }
             catch (Exception ex)
             {
