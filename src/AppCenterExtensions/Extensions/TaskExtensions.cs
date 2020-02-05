@@ -6,12 +6,26 @@ using System.Threading.Tasks;
 
 namespace AppCenterExtensions.Extensions
 {
-    [ExcludeFromCodeCoverage]
+    /// <summary>
+    /// Exposes extension methods for the Task class
+    /// </summary>
     public static class TaskExtensions
     {
-        public static Task Empty { get; } = Task.Delay(0);
-
-        public static async void Forget(this Task task, bool report = true)
+        /// <summary>
+        /// Performs a fire-and-forget operation on a given Task
+        /// </summary>
+        /// <param name="task">Task to await and wrap with a try/catch</param>
+        /// <param name="report">
+        /// Keep this to TRUE to report any possibly thrown Exceptions to AppCenter
+        /// </param>
+        /// <param name="crashes">
+        /// Keep this as NULL to use the default implementation.
+        /// This is only exposed for unit testing purposes
+        /// </param>
+        public static async void Forget(
+            this Task task, 
+            bool report = true,
+            ICrashes crashes = null)
         {
             try
             {

@@ -5,8 +5,17 @@ using System.Runtime.Serialization;
 
 namespace AppCenterExtensions.Extensions
 {
+    /// <summary>
+    /// Exposes extension methods for the object class
+    /// </summary>
     public static class ObjectExtensions
     {
+        /// <summary>
+        /// Gets a string dictionary with key/values that represent
+        /// the properties exposed by the specified argument 
+        /// </summary>
+        /// <param name="obj">Any complex object</param>
+        /// <returns>Returns a string dictionary</returns>
         public static IDictionary<string, string> ToDictionary(this object obj)
         {
             var dictionary = new Dictionary<string, string>();
