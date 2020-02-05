@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 #pragma warning disable AvoidAsyncVoid // Avoid async void
@@ -8,6 +9,7 @@ namespace AppCenterExtensions.Extensions
     /// <summary>
     /// Exposes extension methods for the Task class
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public static class TaskExtensions
     {
         /// <summary>
