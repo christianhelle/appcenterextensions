@@ -41,7 +41,9 @@ The reason for the `async` API here is because `anonymizeAppCenterUser` internal
 
 ## Anonymous User Information
 
-The component `AppCenterSetup` exposes a method called `UseAnonymousUserIdAsync()` which sets the UserId in AppCenter to the first 8 characters a GUID that is unique per app installation. This can be used as a **support key** for uniquely identifying application users for instrumentation and troubleshooting
+The component `AppCenterSetup` exposes a method called `UseAnonymousUserIdAsync()` which sets the UserId in AppCenter to the first 8 characters a GUID that is unique per app installation. This can be used as a **support key** for uniquely identifying application users for instrumentation and troubleshooting. The **support key** can be attached to all HTTP calls by using the `DiagnosticDelegatingHandler`
+
+![AppCenter Crash Report](https://github.com/christianhelle/appcenterextensions/blob/master/images/appcenter-crash-report.png?raw=true)
 
 ## Error Reporting
 
