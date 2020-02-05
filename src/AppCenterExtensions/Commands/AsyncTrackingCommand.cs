@@ -14,7 +14,7 @@ namespace AppCenterExtensions.Commands
         private readonly Func<bool> canExecute;
 
         /// <summary>
-        /// Constructor
+        /// Creates an instance of AsyncTrackingCommand
         /// </summary>
         /// <param name="executeFunc">Async callback function</param>
         /// <param name="canExecute">Callback function invoked to check if OnExecute() can be invoked</param>

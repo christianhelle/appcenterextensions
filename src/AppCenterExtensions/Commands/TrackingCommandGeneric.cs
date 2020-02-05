@@ -12,7 +12,7 @@ namespace AppCenterExtensions.Commands
         private readonly Func<T, bool> canExecute;
 
         /// <summary>
-        /// Constructor
+        /// Creates an instance of TrackingCommand
         /// </summary>
         /// <param name="action">Callback function</param>
         /// <param name="canExecute">Callback function invoked to check if OnExecute() can be invoked</param>
