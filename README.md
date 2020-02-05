@@ -74,7 +74,12 @@ Example:
 
 ```
 var httpClient = new HttpClient(new DiagnosticDelegatingHandler());
+await httpClient.GetAsync("https://entbpr4b9bdpo.x.pipedream.net/");
 ```
+
+In the example above we made an HTTP GET call to the [RequestBin](https://requestbin.com) endpoint https://entbpr4b9bdpo.x.pipedream.net. This will result in the following we inspected in [RequestBin](https://requestbin.com/r/entbpr4b9bdpo/1XO0uroL0xZlDfvPNKlFBZaRLo0)
+
+![AppCenter Crash Report](https://github.com/christianhelle/appcenterextensions/blob/master/images/http-diagnostic-headers.png?raw=true)
 
 ## ITrackingCommand
 
