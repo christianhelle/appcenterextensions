@@ -47,7 +47,7 @@ namespace SampleApp.ViewModels
             try
             {
                 var httpClient = new HttpClient(new DiagnosticDelegatingHandler());
-                var response = await httpClient.GetAsync("https://google.com/404");
+                var response = await httpClient.GetAsync("https://entbpr4b9bdpo.x.pipedream.net/");
                 response.EnsureSuccessStatusCode();
             }
             catch (Exception ex)
