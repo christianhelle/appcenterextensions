@@ -36,7 +36,8 @@ namespace AppCenterExtensions.Commands
                 t =>
                     t != GetType() &&
                     t.BaseType != typeof(TrackingCommandBase) &&
-                    !t.GetTypeInfo().IsAssignableFrom(GetType()));
+                    !t.IsInstanceOfType(GetType()) &&
+                    !t.IsAssignableFrom(typeof(TrackingCommandBase)));
             return callerType;
         }
 
