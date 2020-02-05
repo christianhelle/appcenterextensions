@@ -65,7 +65,7 @@
                 <Button Margin="0,10,0,0" Text="Learn more" Command="{Binding LearnMoreTappedCommand}" BackgroundColor="{StaticResource Primary}" TextColor="White" />
                 <Button Margin="0,10,0,0" Text="Crash test" Command="{Binding CrashTestTappedCommand}" BackgroundColor="{StaticResource Primary}" TextColor="White" />
                 <Button Margin="0,10,0,0" Text="Do Nothing" Command="{Binding ButtonTappedCommand}" CommandParameter="Test" BackgroundColor="{StaticResource Primary}" TextColor="White" />
-                <Button Margin="0,10,0,0" Text="404 HTTP Request" Command="{Binding OpenBadUrlTappedCommand}" CommandParameter="Test" BackgroundColor="{StaticResource Primary}" TextColor="White" />
+                <Button Margin="0,10,0,0" Text="HTTP Request" Command="{Binding OpenBadUrlTappedCommand}" CommandParameter="Test" BackgroundColor="{StaticResource Primary}" TextColor="White" />
             </StackLayout>
         </ScrollView>
     </Grid>
