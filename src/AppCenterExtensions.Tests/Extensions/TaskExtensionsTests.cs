@@ -26,11 +26,17 @@ namespace AppCenterExtensions.Tests.Extensions
         }
 
         [Theory, AutoMoqData]
-        public void Forget_Never_Throws(
-            Exception exception,
-            ICrashes crashes)
+        public void Forget_Swallows_Exceptions(
+            Exception exception)
             => new Action(
-                    () => Task.Run(() => throw exception).Forget(true, crashes))
+                    () => Task.Run(() => throw exception).Forget())
+                .Should()
+                .NotThrow();
+
+        [Fact]
+        public void Forget_Never_Throws()
+            => new Action(
+                    () => Task.CompletedTask.Forget())
                 .Should()
                 .NotThrow();
     }
