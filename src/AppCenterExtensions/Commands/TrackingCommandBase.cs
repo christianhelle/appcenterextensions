@@ -7,11 +7,22 @@ using AppCenterExtensions.Extensions;
 
 namespace AppCenterExtensions.Commands
 {
+    /// <summary>
+    /// Base Tracking ICommand implementation that sends analytics data to AppCenter upon Execute()
+    /// </summary>
     public abstract class TrackingCommandBase : ITrackingCommand
     {
         private readonly Delegate action;
         private readonly IAnalytics analytics;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="action">The callback to execute upon Execute()</param>
+        /// <param name="eventName">Event name that describes what the command is used for (ex: Logout Button Tapped)</param>
+        /// <param name="screenName">Screen or page name that hosts the user interaction component (ex: Settings)</param>
+        /// <param name="properties">Custom properties to attach to the analytics data (ex: {"Current Item",CurrentItem.Name})</param>
+        /// <param name="analytics">Keep this as NULL to use the default implementation. This is exposed for unit testing purposes</param>
         protected TrackingCommandBase(
             Delegate action,
             string eventName,
@@ -41,11 +52,26 @@ namespace AppCenterExtensions.Commands
             return callerType;
         }
 
+        /// <summary>
+        /// This method is invoked upon CanExecute()
+        /// </summary>
+        /// <param name="parameter">Parameter specified by ICommand.CanExecute()</param>
+        /// <returns>true if this command can be executed; otherwise, false.</returns>
         protected abstract bool OnCanExecute(object parameter);
+
+        /// <summary>
+        /// This method is invoked upon Execute()
+        /// </summary>
+        /// <param name="parameter"></param>
         protected abstract void OnExecute(object parameter);
 
+        /// <summary>Defines the method that determines whether the command can execute in its current state.</summary>
+        /// <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
+        /// <returns>true if this command can be executed; otherwise, false.</returns>
         public bool CanExecute(object parameter) => OnCanExecute(parameter);
 
+        /// <summary>Defines the method to be called when the command is invoked.</summary>
+        /// <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
         public void Execute(object parameter)
         {
             if (!CanExecute(parameter))
@@ -54,12 +80,28 @@ namespace AppCenterExtensions.Commands
             Report(parameter);
         }
 
+        /// <summary>
+        /// Event name that describes what the command is used for (ex: Logout Button Tapped)
+        /// </summary>
         public string EventName { get; }
+
+        /// <summary>
+        /// Screen or page name that hosts the user interaction component (ex: Settings)
+        /// </summary>
         public string ScreenName { get; }
+
+        /// <summary>
+        /// Custom properties to attach to the analytics data (ex: {"Current Item",CurrentItem.Name})
+        /// </summary>
         public Dictionary<string, string> Properties { get; }
 
+        /// <summary>Occurs when changes occur that affect whether or not the command should execute.</summary>
+        /// <returns></returns>
         public event EventHandler CanExecuteChanged;
 
+        /// <summary>
+        /// Raise the CanExecuteChanged event
+        /// </summary>
         public void RaiseCanExecuteChanged()
             => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
 
