@@ -8,11 +8,22 @@ using System.Threading.Tasks;
 
 namespace AppCenterExtensions.Http
 {
+    /// <summary>
+    /// A HttpMessageHandler that logs non-successful requests to AppCenter Analytics using the event name HTTP Error
+    /// This component will also attach custom HTTP headers like the AppCenter SDK version, Install ID, and Support Key
+    /// to all HTTP requests
+    /// </summary>
     public class DiagnosticDelegatingHandler : DelegatingHandler
     {
         private readonly IAppCenterSetup appCenterSetup;
         private readonly IAnalytics analytics;
 
+        /// <summary>
+        /// Creates a new instance of DiagnosticDelegatingHandler
+        /// using the default HttpClientHandler as the inner handler
+        /// </summary>
+        /// <param name="analytics">Keep this as NULL to use the default implementation. This is only exposed for unit testing purposes</param>
+        /// <param name="appCenterSetup">Keep this as NULL to use the default implementation. This is only exposed for unit testing purposes</param>
         public DiagnosticDelegatingHandler(
             IAnalytics analytics = null,
             IAppCenterSetup appCenterSetup = null)
@@ -22,6 +33,13 @@ namespace AppCenterExtensions.Http
             this.appCenterSetup = appCenterSetup ?? AppCenterSetup.Instance;
         }
 
+        /// <summary>
+        /// Creates a new instance of DiagnosticDelegatingHandler
+        /// using the specified HttpMessageHandler as the inner handler
+        /// </summary>
+        /// <param name="innerHandler">The inner handler responsible for processing HTTP requests</param>
+        /// <param name="analytics">Keep this as NULL to use the default implementation. This is only exposed for unit testing purposes</param>
+        /// <param name="appCenterSetup">Keep this as NULL to use the default implementation. This is only exposed for unit testing purposes</param>
         public DiagnosticDelegatingHandler(
             HttpMessageHandler innerHandler,
             IAnalytics analytics = null,
@@ -32,6 +50,11 @@ namespace AppCenterExtensions.Http
             this.appCenterSetup = appCenterSetup ?? AppCenterSetup.Instance;
         }
 
+        /// <summary>Sends an HTTP request to the inner handler to send to the server as an asynchronous operation.</summary>
+        /// <param name="request">The HTTP request message to send to the server.</param>
+        /// <param name="cancellationToken">A cancellation token to cancel operation.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        /// <exception cref="T:System.ArgumentNullException">The <paramref name="request">request</paramref> was null.</exception>
         protected override async Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken)
