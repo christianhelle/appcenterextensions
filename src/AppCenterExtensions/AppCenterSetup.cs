@@ -76,9 +76,15 @@ namespace AppCenterExtensions
         /// </summary>
         /// <returns></returns>
         public async Task<string> GetSupportKeyAsync()
-            => (await AppCenter.GetInstallIdAsync() ?? Guid.NewGuid())
+        {
+            if (!string.IsNullOrWhiteSpace(supportKey))
+                return supportKey;
+
+            return supportKey =
+                (await AppCenter.GetInstallIdAsync() ?? Guid.NewGuid())
                 .ToString()
                 .Substring(0, 8);
+        }
 
         /// <summary>
         /// Gets the AppCenter SDK Version
