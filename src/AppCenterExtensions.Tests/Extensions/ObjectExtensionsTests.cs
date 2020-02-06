@@ -20,6 +20,10 @@ namespace AppCenterExtensions.Tests.Extensions
         public void ToDictionary_Respects_IgnoreDataMember(ComplexObject obj)
             => obj.ToDictionary().Should().NotContainKey(nameof(ComplexObject.IgnoredProperty));
 
+        [Theory, AutoData]
+        public void ToDictionary_Ignores_String(string str)
+            => str.ToDictionary().Should().BeEmpty();
+
         public class ComplexObject
         {
             public string Name { get; set; }

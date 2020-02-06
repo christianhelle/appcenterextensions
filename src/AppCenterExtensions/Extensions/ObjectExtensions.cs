@@ -25,6 +25,9 @@ namespace AppCenterExtensions.Extensions
 
         private static void ReadObjectProperties(object obj, IDictionary<string, string> dictionary)
         {
+            if (obj is string)
+                return;
+
             var objProperties = obj.GetType().GetProperties();
             foreach (var dataProperty in objProperties.Where(c => !string.IsNullOrWhiteSpace(c.Name)))
             {
