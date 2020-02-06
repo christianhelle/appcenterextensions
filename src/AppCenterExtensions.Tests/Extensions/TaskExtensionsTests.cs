@@ -62,12 +62,9 @@ namespace AppCenterExtensions.Tests.Extensions
             Exception exception,
             ICrashes crashes)
         {
-            await Task.Run(() => FailingGenericTask(exception))
-                .WhenErrorReportAsync(crashes);
+            Task<string> Function() => throw exception;
+            await Task.Run(Function).WhenErrorReportAsync(crashes);
             Mock.Get(crashes).Verify(c => c.TrackError(exception, null));
         }
-
-        private static Task<string> FailingGenericTask(Exception exception)
-            => throw exception; 
     }
 }

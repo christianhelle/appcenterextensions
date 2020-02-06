@@ -255,6 +255,25 @@ public partial class App : Application
 }
 ```
 
+## Task Extensions
+
+This library includes a few Task extension methods with AppCenter error reporting in mind. Possible exceptions that occur in the async operation are swallowed and reported to AppCenter. These extension methods will internally wrap the Task in a `try/catch` and `await` the Task using `ConfigureAwait(false)`. 
+
+Here are usage some examples
+
+- Fire and Forget on a `Task` (Note: `Forget()` returns `void`)
+```
+var task = someClass.SomethingAsync()
+task.Forget()
+```
+
+- Awaitable `Task`
+```
+var task = someClass.SomethingAsync()
+await task.WhenErrorReportAsync();
+```
+
+
 For tips and tricks on software development, check out [my blog](https://christian-helle.blogspot.com)
 
 If you find this useful and feel a bit generous then feel free to [buy me a coffee](https://www.buymeacoffee.com/christianhelle) :)
