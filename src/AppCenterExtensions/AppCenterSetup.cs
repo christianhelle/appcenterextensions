@@ -13,7 +13,7 @@ namespace AppCenterExtensions
     [ExcludeFromCodeCoverage]
     public sealed class AppCenterSetup : IAppCenterSetup
     {
-        private static volatile string supportKey;
+        private volatile string supportKey;
 
         /// <summary>
         /// Singleton default instance
