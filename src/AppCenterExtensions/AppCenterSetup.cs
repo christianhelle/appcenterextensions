@@ -13,12 +13,13 @@ namespace AppCenterExtensions
     [ExcludeFromCodeCoverage]
     public sealed class AppCenterSetup : IAppCenterSetup
     {
-        private static readonly Lazy<AppCenterSetup> LazyInstance = new Lazy<AppCenterSetup>();
-        
+        private static volatile string supportKey;
+
         /// <summary>
         /// Singleton default instance
         /// </summary>
-        public static AppCenterSetup Instance => LazyInstance.Value;
+        public static AppCenterSetup Instance
+            => Singleton<AppCenterSetup>.GetInstance();
 
         /// <summary>
         /// Start AppCenter Crash Reporting and Analytics

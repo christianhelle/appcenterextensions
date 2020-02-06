@@ -12,7 +12,7 @@ namespace AppCenterExtensions
         /// <summary>
         /// Singleton default implementation
         /// </summary>
-        public static ICrashes Instance { get; } = new AppCenterCrashes();
+        public static ICrashes Instance => Singleton<AppCenterCrashes>.GetInstance();
 
         /// <summary>
         /// Track a handled error

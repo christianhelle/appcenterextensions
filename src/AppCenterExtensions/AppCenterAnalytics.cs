@@ -11,7 +11,7 @@ namespace AppCenterExtensions
         /// <summary>
         /// Singleton default implementation
         /// </summary>
-        public static IAnalytics Instance { get; } = new AppCenterAnalytics();
+        public static IAnalytics Instance => Singleton<AppCenterAnalytics>.GetInstance();
 
         /// <summary>
         /// Track a custom event
