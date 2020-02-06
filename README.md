@@ -267,12 +267,14 @@ var task = someClass.SomethingAsync()
 task.Forget()
 ```
 
-- Awaitable `Task`
+- Awaitable `Task` (also available for `Task<T>`)
 ```
 var task = someClass.SomethingAsync()
 await task.WhenErrorReportAsync();
 ```
 
+
+# 
 
 For tips and tricks on software development, check out [my blog](https://christian-helle.blogspot.com)
 
