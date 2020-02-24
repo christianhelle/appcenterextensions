@@ -1,0 +1,10 @@
+language: csharp
+mono: none
+dotnet: 2.1
+
+install:
+  - dotnet restore src/AppCenterExtensions.sln
+
+script:
+  - dotnet build src/AppCenterExtensions.sln
+  - dotnet test src/AppCenterExtensions.sln
