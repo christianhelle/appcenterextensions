@@ -38,7 +38,7 @@ await AppCenterSetup.Instance.StartAsync(
     anonymizeAppCenterUser: true);
 ```
 
-The reason for the `async` API here is because `anonymizeAppCenterUser` internally relies on an `async` API. The synchronize API's for starting AppCenter are non-blocking methods that do a fire-and-forget call to `StartAsync(string,bool)`.
+The reason for the `async` API here is because `anonymizeAppCenterUser` internally relies on an `async` API. The synchronous API's for starting AppCenter are non-blocking methods that do a fire-and-forget call to `StartAsync(string,bool)`.
 
 ## Anonymous User Information
 
