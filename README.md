@@ -153,7 +153,7 @@ XAML Example:
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:d="http://xamarin.com/schemas/2014/forms/design" 
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:ext="clr-namespace:ChristianHelle.DeveloperTools.AppCenterExtensions.XamarinForms;assembly=AppCenterExtensions.XamarinForms"
+    xmlns:ext="clr-namespace:AppCenterExtensions.XamarinForms;assembly=AppCenterExtensions.XamarinForms"
     mc:Ignorable="d" 
     x:Class="SampleApp.Views.ItemDetailPage" 
     Title="{Binding Title}">
