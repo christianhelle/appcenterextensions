@@ -18,10 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="UnitTest1.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\AppCenterExtensions.AppInsights\AppCenterExtensions.AppInsights.csproj" />
     <ProjectReference Include="..\AppCenterExtensions.XamarinForms\AppCenterExtensions.XamarinForms.csproj" />
     <ProjectReference Include="..\AppCenterExtensions\AppCenterExtensions.csproj" />
   </ItemGroup>
