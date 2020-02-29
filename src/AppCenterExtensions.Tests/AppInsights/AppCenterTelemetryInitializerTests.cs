@@ -16,15 +16,13 @@ namespace AppCenterExtensions.Tests.AppInsights
     {
         private readonly Fixture fixture = new Fixture();
         private readonly IHeaderDictionary headers = new HeadersDictionary();
-        private Mock<IHttpContextAccessor> mockHttpContextAccessor;
-        private Mock<HttpContext> mockHttpContext;
-        private Mock<HttpRequest> mockRequest;
+        private readonly Mock<IHttpContextAccessor> mockHttpContextAccessor;
 
         public AppCenterTelemetryInitializerTests()
         {
             mockHttpContextAccessor = new Mock<IHttpContextAccessor>();
-            mockHttpContext = new Mock<HttpContext>();
-            mockRequest = new Mock<HttpRequest>();
+            var mockHttpContext = new Mock<HttpContext>();
+            var mockRequest = new Mock<HttpRequest>();
 
             headers.Add(TelemetryHeaders.SupportKeyHeader, fixture.Create<StringValues>());
             headers.Add(TelemetryHeaders.AppCenterInstallIdHeader, fixture.Create<StringValues>());
@@ -78,7 +76,7 @@ namespace AppCenterExtensions.Tests.AppInsights
             mock.Setup(c => c.Properties).Returns(dictionary);
 
             var sut = new AppCenterTelemetryInitializer(mockHttpContextAccessor.Object);
-            sut.Initialize(properties as ITelemetry);
+            sut.Initialize(properties);
             return dictionary;
         }
     }

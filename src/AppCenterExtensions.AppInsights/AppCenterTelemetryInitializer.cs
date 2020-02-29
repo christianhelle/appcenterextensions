@@ -38,7 +38,7 @@ namespace AppCenterExtensions.AppInsights
             var appCenterInstallId = TryGetValue(TelemetryHeaders.AppCenterInstallIdHeader);
             if (!string.IsNullOrWhiteSpace(appCenterSdkVersion))
             {
-                sp.Properties[TelemetryHeaders.AppCenterInstallIdHeader] = appCenterSdkVersion;
+                sp.Properties[TelemetryHeaders.AppCenterInstallIdHeader] = appCenterInstallId;
             }
         }
 
