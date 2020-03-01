@@ -9,6 +9,10 @@
         <RepositoryUrl>https://github.com/christianhelle/appcenterextensions</RepositoryUrl>
     </PropertyGroup>
 
+    <PropertyGroup>
+      <DocumentationFile>AppCenterExtensions.XamarinForms.xml</DocumentationFile>
+    </PropertyGroup>
+
     <ItemGroup>
       <PackageReference Include="Xamarin.Forms" Version="4.0.0.425677" />
     </ItemGroup>

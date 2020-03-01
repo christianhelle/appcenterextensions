@@ -9,6 +9,10 @@
     <RepositoryUrl>https://github.com/christianhelle/appcenterextensions</RepositoryUrl>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <DocumentationFile>AppCenterExtensions.AppInsights.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights" Version="2.13.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />

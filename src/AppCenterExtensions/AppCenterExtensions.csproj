@@ -9,6 +9,10 @@
     <RepositoryUrl>https://github.com/christianhelle/appcenterextensions</RepositoryUrl>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <DocumentationFile>AppCenterExtensions.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="2.6.4" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="2.6.4" />
