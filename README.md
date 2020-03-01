@@ -81,8 +81,8 @@ Example:
 ```
 using System.Threading.Tasks;
 using System.Windows.Input;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Commands;
-using ChristianHelle.DeveloperTools.AppCenterExtensions.Extensions;
+using AppCenterExtensions.Commands;
+using AppCenterExtensions.Extensions;
 using Microsoft.AppCenter.Crashes;
 using Xamarin.Essentials;
 
