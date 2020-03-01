@@ -3,6 +3,7 @@ using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AppCenterExtensions.AppInsights
@@ -10,35 +11,24 @@ namespace AppCenterExtensions.AppInsights
     public class AppCenterTelemetryInitializer : ITelemetryInitializer
     {
         private readonly IHttpContextAccessor context;
+        private readonly IReadOnlyList<string> headerKeys;
 
-        public AppCenterTelemetryInitializer(IHttpContextAccessor context)
+        public AppCenterTelemetryInitializer(IHttpContextAccessor context, string[] headerKeys = null)
         {
             this.context = context ?? throw new ArgumentNullException(nameof(context));
+            this.headerKeys = headerKeys ?? TelemetryHeaders.HeaderKeys;
         }
 
         public void Initialize(ITelemetry telemetry)
         {
-            if (!(telemetry is ISupportProperties sp))
-            {
+            if (!(telemetry is ISupportProperties supportProperties))
                 return;
-            }
 
-            var supportKey = TryGetValue(TelemetryHeaders.SupportKeyHeader);
-            if (!string.IsNullOrWhiteSpace(supportKey))
+            foreach (var headerKey in headerKeys)
             {
-                sp.Properties[TelemetryHeaders.SupportKeyHeader] = supportKey;
-            }
-
-            var appCenterSdkVersion = TryGetValue(TelemetryHeaders.AppCenterSdkVersionHeader);
-            if (!string.IsNullOrWhiteSpace(appCenterSdkVersion))
-            {
-                sp.Properties[TelemetryHeaders.AppCenterSdkVersionHeader] = appCenterSdkVersion;
-            }
-
-            var appCenterInstallId = TryGetValue(TelemetryHeaders.AppCenterInstallIdHeader);
-            if (!string.IsNullOrWhiteSpace(appCenterSdkVersion))
-            {
-                sp.Properties[TelemetryHeaders.AppCenterInstallIdHeader] = appCenterInstallId;
+                var value = TryGetValue(headerKey);
+                if (!string.IsNullOrWhiteSpace(value))
+                    supportProperties.Properties[headerKey] = value;
             }
         }
 
@@ -48,8 +38,8 @@ namespace AppCenterExtensions.AppInsights
             var request = httpContext?.Request;
             var headers = request?.Headers;
             return headers?.TryGetValue(headerKey, out var value) ?? false
-                           ? value.FirstOrDefault()
-                           : null;
+                ? value.FirstOrDefault()
+                : null;
         }
     }
 }
