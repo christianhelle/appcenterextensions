@@ -19,6 +19,7 @@ A set of convenience classes and extension methods to simplify Crash Reporting a
 This library is distributed as 2 nuget packages
 - [AppCenterExtensions](https://www.nuget.org/packages/appcenterextensions) - This contains extension methods, `ICommand` implementations, and convenience classes for initializing and configuring AppCenter. This package depends on [Microsoft.AppCenter.Analytics](https://www.nuget.org/packages/Microsoft.AppCenter.Analytics/) and [Microsoft.AppCenter.Crashes](https://www.nuget.org/packages/Microsoft.AppCenter.Crashes/) version 2.6.4
 - [AppCenterExtensions.XamarinForms](https://www.nuget.org/packages/appcenterextensions.xamarinforms) - This contains components required for automatic page tracking using [Xamarin.Forms](https://github.com/xamarin/Xamarin.Forms). This package depends on [AppCenterExtensions](https://www.nuget.org/packages/appcenterextensions) and [Xamarin.Forms](https://www.nuget.org/packages/Xamarin.Forms/) version 4.0.0
+- [AppCenterExtensions.AppInsights](https://www.nuget.org/packages/appcenterextensions.appinsights) - This contains extension methods and `ITelemetryInitializer` implementations to be used in a ASP.NET Core web app for including AppCenter diagnostic information when logging to Application Insights 
 
 ## Getting Started
 
@@ -66,23 +67,6 @@ catch (Exception e)
     e.Report();
 }
 ```
-
-## HTTP Error Logging
-
-The library provides a `HttpMessageHandler` implementation that logs non-successfuly HTTP results to AppCenter Analytics. This component will also attach HTTP headers describing the AppCenter SDK Version, Install ID, and a support key to all HTTP requests. The logged failed responses will contain the Endpoint URL (including the HTTP verb), Response status code, how the duration of the HTTP call. This will be logged under the event name **HTTP Error**
-
-You will in most (if not all) cases would want to keep a singleton instance of the `HttpClient`. The `DiagnosticDelegatingHandler` is designed with unit testing in mind and accepts an `IAnalytics` and `IAppCenterSetup` interface, it also accepts an inner `HttpMessageHandler` if you wish to chain multiple delegating handlers.
-
-Example:
-
-```
-var httpClient = new HttpClient(new DiagnosticDelegatingHandler());
-await httpClient.GetAsync("https://entbpr4b9bdpo.x.pipedream.net/");
-```
-
-In the example above we made an HTTP GET call to the [RequestBin](https://requestbin.com) endpoint https://entbpr4b9bdpo.x.pipedream.net. This will result in the following we inspected in [RequestBin](https://requestbin.com/r/entbpr4b9bdpo/1XO0uroL0xZlDfvPNKlFBZaRLo0)
-
-![AppCenter Crash Report](https://github.com/christianhelle/appcenterextensions/blob/master/images/http-diagnostic-headers.png?raw=true)
 
 ## ITrackingCommand
 
@@ -276,6 +260,54 @@ var task = someClass.SomethingAsync()
 await task.WhenErrorReportAsync();
 ```
 
+## HTTP Error Logging
+
+The library provides a `HttpMessageHandler` implementation that logs non-successfuly HTTP results to AppCenter Analytics. This component will also attach HTTP headers describing the AppCenter SDK Version, Install ID, and a support key to all HTTP requests. The logged failed responses will contain the Endpoint URL (including the HTTP verb), Response status code, how the duration of the HTTP call. This will be logged under the event name **HTTP Error**
+
+You will in most (if not all) cases would want to keep a singleton instance of the `HttpClient`. The `DiagnosticDelegatingHandler` is designed with unit testing in mind and accepts an `IAnalytics` and `IAppCenterSetup` interface, it also accepts an inner `HttpMessageHandler` if you wish to chain multiple delegating handlers.
+
+Example:
+
+```
+var httpClient = new HttpClient(new DiagnosticDelegatingHandler());
+await httpClient.GetAsync("https://entbpr4b9bdpo.x.pipedream.net/");
+```
+
+In the example above we made an HTTP GET call to the [RequestBin](https://requestbin.com) endpoint https://entbpr4b9bdpo.x.pipedream.net. This will result in the following we inspected in [RequestBin](https://requestbin.com/r/entbpr4b9bdpo/1XO0uroL0xZlDfvPNKlFBZaRLo0)
+
+![AppCenter Crash Report](https://github.com/christianhelle/appcenterextensions/blob/master/images/http-diagnostic-headers.png?raw=true)
+
+
+## AppInsights Extensions
+
+The library provides an extension method to `IServiceCollection` called `AddAppCenterTelemetry()` that should be called from the `ConfigureServices(IServiceCollection services)` in your ASP.NET Core `Startup` class. This enables logging the AppCenter diagnostic information described in the previous section to Application Insights
+
+Here's an example taken from the [Startup](https://github.com/christianhelle/appcenterextensions/blob/master/sample/SampleApp.Web/Startup.cs) class in the sample web project
+
+```
+public class Startup
+{
+    public Startup(IConfiguration configuration)
+    {
+        Configuration = configuration;
+    }
+
+    public IConfiguration Configuration { get; }
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        // Configure and register services to the IoC
+
+        services.AddApplicationInsightsTelemetry();
+        services.AddAppCenterTelemetry();
+    }
+
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        // Configure app
+    }
+}
+```
 
 # 
 
