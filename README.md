@@ -309,6 +309,16 @@ public class Startup
 }
 ```
 
+Once this is setup, AppCenter diagnostic information should now be searchable and visible in Application Insights. Here's a screenshot of search results for the **x-supportkey** header
+
+![](https://github.com/christianhelle/appcenterextensions/blob/master/images/appinsights-search-result.png?raw=true)
+
+and here's a screenshot of the details of a single request containing AppCenter diagnostic information logged in Application Insights
+
+![](https://github.com/christianhelle/appcenterextensions/blob/master/images/appinsights-search-result-details.png?raw=true)
+
+With this flow you can now correlate Crash Reports and Analytics data from AppCenter with the HTTP requests for your backend systems in Application Insights. In the systems that I have been involved with building we include the AppCenter diagnostic information from our [API Gateway](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/architect-microservice-container-applications/direct-client-to-microservice-communication-versus-the-api-gateway-pattern) to all calls to our internal Microservices
+
 # 
 
 For tips and tricks on software development, check out [my blog](https://christian-helle.blogspot.com)
