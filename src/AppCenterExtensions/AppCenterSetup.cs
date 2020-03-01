@@ -30,6 +30,11 @@ namespace AppCenterExtensions
         public void Start(string appleSecret, string androidSecret, bool anonymizeUser = false)
             => Start(GetSecrets(appleSecret, androidSecret), anonymizeUser);
 
+        /// <summary>
+        /// Start AppCenter Crash Reporting and Analytics
+        /// </summary>
+        /// <param name="appSecret">AppCenter secrets for all supported platforms</param>
+        /// <param name="anonymizeUser">Set to TRUE to use a 8 character unique key as the UserId</param>
         public void Start(string appSecret, bool anonymizeUser = false)
             => StartAsync(appSecret, anonymizeUser).Forget();
 
