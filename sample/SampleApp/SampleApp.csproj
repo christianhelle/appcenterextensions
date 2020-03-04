@@ -14,7 +14,7 @@
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="2.6.4" />
     <PackageReference Include="Xamarin.Forms" Version="4.4.0.991537" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
-    <PackageReference Include="AppCenterExtensions.XamarinForms" Version="1.0.955" />
+    <PackageReference Include="AppCenterExtensions.XamarinForms" Version="1.0.1294" />
   </ItemGroup>
 
 </Project>
