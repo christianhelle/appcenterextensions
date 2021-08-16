@@ -20,7 +20,7 @@ namespace AppCenterExtensions.Tests.Extensions
             
             new Func<Task>(() => task)
                 .Should()
-                .Throw<Exception>();
+                .ThrowAsync<Exception>();
 
             Mock.Get(crashes).Verify(c => c.TrackError(exception, null));
         }
@@ -46,7 +46,7 @@ namespace AppCenterExtensions.Tests.Extensions
             => new Func<Task>(
                     () => Task.Run(() => throw exception).WhenErrorReportAsync())
                 .Should()
-                .NotThrow();
+                .NotThrowAsync();
         
         [Theory, AutoMoqData]
         public async Task WhenErrorReportAsync_Invokes_Crashes_TrackError(
