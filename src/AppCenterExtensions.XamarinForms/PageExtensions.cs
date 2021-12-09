@@ -11,6 +11,10 @@ namespace AppCenterExtensions.XamarinForms
     /// </summary>
     public static class PageExtensions
     {
+        const string DurationKey = "Duration";
+
+        static readonly Dictionary<string, string> AdditionalTrackingInfo = new Dictionary<string, string>();
+
         /// <summary>
         /// Track the Page in AppCenter Analytics
         /// </summary>
@@ -25,13 +29,45 @@ namespace AppCenterExtensions.XamarinForms
             var properties = new Dictionary<string, string>
             {
                 [nameof(Page.Title)] = page.Title,
-                ["Duration"] = duration.TotalSeconds.ToString(CultureInfo.InvariantCulture)
+                [DurationKey] = duration.TotalSeconds.ToString(CultureInfo.InvariantCulture)
             };
+
+            foreach (var additionalTrackingInfo in AdditionalTrackingInfo)
+            {
+                if (properties.ContainsKey(additionalTrackingInfo.Key))
+                {
+                    properties[additionalTrackingInfo.Key] = additionalTrackingInfo.Value;
+                }
+                else
+                {
+                    properties.Add(additionalTrackingInfo.Key, additionalTrackingInfo.Value);
+                }
+            }
 
             (analytics ?? AppCenterAnalytics.Instance)
                 .TrackEvent(
                     page.GetType().Name.ToTrackingEventName(),
                     properties);
+        }
+
+        /// <summary>
+        /// Track any additonal information.
+        /// </summary>
+        /// <param name="key">Key of the additional information</param>
+        /// <param name="value">Value of the additional information</param>
+        public static void AddAdditionalTrackingInfo(string key, string value)
+        {
+            if (key == DurationKey)
+                return;
+
+            if (AdditionalTrackingInfo.ContainsKey(key))
+            {
+                AdditionalTrackingInfo[key] = value;
+            }
+            else
+            {
+                AdditionalTrackingInfo.Add(key, value);
+            }
         }
     }
 }
