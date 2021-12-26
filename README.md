@@ -27,7 +27,7 @@ This library is distributed as 3 nuget packages
 
 This library is configured almost the same way as the AppCenter SDK. You provide the AppCenter secrets, and specify whether to anonymize the user information. Both Crash Reporting and Analytics are **always** enabled when using `AppCenterSetup`.
 
-```
+```csharp
 AppCenterSetup.Instance.Start(
     "[iOS AppCenter secret]",
     "[Android AppCenter secret]",
@@ -36,7 +36,7 @@ AppCenterSetup.Instance.Start(
 
 or
 
-```
+```csharp
 await AppCenterSetup.Instance.StartAsync(
     "[iOS AppCenter secret]",
     "[Android AppCenter secret]",
@@ -57,7 +57,7 @@ The library exposes extension methods to the `Exception` class for conveniently 
 
 Example:
 
-```
+```csharp
 try
 {
     // Something that blows up
@@ -80,7 +80,7 @@ This library provides 3 convenience implementations of `ICommand` that will repo
 
 Example:
 
-```
+```csharp
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AppCenterExtensions.Commands;
@@ -132,7 +132,7 @@ Automatic page tracking is enabled by replacing the base class of the `ContentPa
 
 XAML Example:
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 
 <ext:TrackingContentPage 
@@ -173,13 +173,13 @@ The `AnalyticsEvent` exposes 2 properties:
 
 To set it up you simply add an instance of `AppCenterTraceListener` to your existing Trace listeners:
 
-```
+```csharp
 Trace.Listeners.Add(new AppCenterTraceListener());
 ```
 
 Here's an example of how to use `System.Diagnostics.Trace` to report errors
 
-```
+```csharp
 try
 {
     // Something that blows up
@@ -203,7 +203,7 @@ catch (Exception e)
 
 and here's an example of to use `System.Diagnostics.Trace` to send analytics data
 
-```
+```csharp
 public partial class App : Application
 {
     private const string StateKey = "State";
@@ -251,13 +251,13 @@ This library includes a few Task extension methods with AppCenter error reportin
 Here are usage some examples
 
 - Fire and Forget on a `Task` (Note: `Forget()` returns `void`)
-```
+```csharp
 var task = someClass.SomethingAsync()
 task.Forget()
 ```
 
 - Awaitable `Task` (also available for `Task<T>`)
-```
+```csharp
 var task = someClass.SomethingAsync()
 await task.WhenErrorReportAsync();
 ```
@@ -270,7 +270,7 @@ You will in most (if not all) cases would want to keep a singleton instance of t
 
 Example:
 
-```
+```csharp
 var httpClient = new HttpClient(new DiagnosticDelegatingHandler());
 await httpClient.GetAsync("https://entbpr4b9bdpo.x.pipedream.net/");
 ```
@@ -286,7 +286,7 @@ The library provides an extension method to `IServiceCollection` called `AddAppC
 
 Here's an example taken from the [Startup](https://github.com/christianhelle/appcenterextensions/blob/master/sample/SampleApp.Web/Startup.cs) class in the sample web project
 
-```
+```csharp
 public class Startup
 {
     public Startup(IConfiguration configuration)
