@@ -40,7 +40,7 @@ The reason for the `async` API here is because `anonymizeAppCenterUser` internal
 
 The component `AppCenterSetup` exposes a method called `UseAnonymousUserIdAsync()` which sets the UserId in AppCenter to the first 8 characters a GUID that is unique per app installation. This can be used as a **support key** for uniquely identifying application users for instrumentation and troubleshooting. The **support key** can be attached to all HTTP calls by using the `DiagnosticDelegatingHandler`
 
-![AppCenter Crash Report](https://github.com/christianhelle/appcenterextensions/blob/master/images/appcenter-crash-report.png?raw=true)
+![AppCenter Crash Report](https://github.com/christianhelle/appcenterextensions/raw/master/images/appcenter-crash-report.png)
 
 ## Error Reporting
 
@@ -268,14 +268,14 @@ await httpClient.GetAsync("https://entbpr4b9bdpo.x.pipedream.net/");
 
 In the example above we made an HTTP GET call to the [RequestBin](https://requestbin.com) endpoint https://entbpr4b9bdpo.x.pipedream.net. This will result in the following we inspected in [RequestBin](https://requestbin.com/r/entbpr4b9bdpo/1XO0uroL0xZlDfvPNKlFBZaRLo0)
 
-![AppCenter Crash Report](https://github.com/christianhelle/appcenterextensions/blob/master/images/http-diagnostic-headers.png?raw=true)
+![AppCenter Crash Report](https://github.com/christianhelle/appcenterextensions/raw/master/images/http-diagnostic-headers.png)
 
 
 ## AppInsights Extensions
 
 The library provides an extension method to `IServiceCollection` called `AddAppCenterTelemetry()` that should be called from the `ConfigureServices(IServiceCollection services)` in your ASP.NET Core `Startup` class. This enables logging the AppCenter diagnostic information described in the previous section to Application Insights
 
-Here's an example taken from the [Startup](https://github.com/christianhelle/appcenterextensions/blob/master/sample/SampleApp.Web/Startup.cs) class in the sample web project
+Here's an example taken from the [Startup](https://github.com/christianhelle/appcenterextensions/raw/master/sample/SampleApp.Web/Startup.cs) class in the sample web project
 
 ```
 public class Startup
@@ -304,11 +304,11 @@ public class Startup
 
 Once this is setup, AppCenter diagnostic information should now be searchable and visible in Application Insights. Here's a screenshot of search results for the **x-supportkey** header
 
-![](https://github.com/christianhelle/appcenterextensions/blob/master/images/appinsights-search-result.png?raw=true)
+![](https://github.com/christianhelle/appcenterextensions/raw/master/images/appinsights-search-result.png)
 
 and here's a screenshot of the details of a single request containing AppCenter diagnostic information logged in Application Insights
 
-![](https://github.com/christianhelle/appcenterextensions/blob/master/images/appinsights-search-result-details.png?raw=true)
+![](https://github.com/christianhelle/appcenterextensions/raw/master/images/appinsights-search-result-details.png)
 
 With this flow you can now correlate Crash Reports and Analytics data from AppCenter with the HTTP requests for your backend systems in Application Insights. In the systems that I have been involved with building we include the AppCenter diagnostic information from our [API Gateway](https://docs.microsoft.com/en-us/dotnet/architecture/microservices/architect-microservice-container-applications/direct-client-to-microservice-communication-versus-the-api-gateway-pattern) to all calls to our internal Microservices
 
