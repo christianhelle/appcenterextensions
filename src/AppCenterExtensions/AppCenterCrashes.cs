@@ -24,6 +24,11 @@ namespace AppCenterExtensions
             Exception exception,
             IDictionary<string, string> properties = null,
             params ErrorAttachmentLog[] attachments)
-            => Crashes.TrackError(exception, properties, attachments);
+        {
+            if (properties == null)
+                properties = new Dictionary<string, string>();
+            properties["SessionId"] = AppCenterSetup.Instance.SessionId;
+            Crashes.TrackError(exception, properties, attachments);
+        }
     }
 }
