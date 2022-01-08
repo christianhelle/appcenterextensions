@@ -21,17 +21,17 @@ namespace AppCenterExtensions
         /// <param name="name">Event name</param>
         /// <param name="properties">Custom properties to include in event</param>
         public void TrackEvent(string name, IDictionary<string, string> properties = null)
-            => SetSupportKeyAsync(properties)
+            => GetCustomPropertiesAsync(properties)
                 .WhenNotNullAsync(t => Analytics.TrackEvent(name, t))
                 .Forget();
 
-        private static async Task<IDictionary<string, string>> SetSupportKeyAsync(
+        private static async Task<IDictionary<string, string>> GetCustomPropertiesAsync(
             IDictionary<string, string> properties)
         {
-            var supportKey = await AppCenterSetup.Instance.GetSupportKeyAsync();
             if (properties == null)
                 properties = new Dictionary<string, string>();
-            properties["SupportKey"] = supportKey;
+            properties["SupportKey"] = await AppCenterSetup.Instance.GetSupportKeyAsync();
+            properties["SessionId"] = AppCenterSetup.Instance.SessionId;
             return properties;
         }
     }
