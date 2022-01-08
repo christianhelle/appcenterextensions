@@ -113,6 +113,11 @@ namespace AppCenterExtensions
             set => AppCenter.LogLevel = value;
         }
 
+        /// <summary>
+        /// Get the unique session identifier for the app session.
+        /// </summary>
+        public string SessionId { get; } = Guid.NewGuid().ToString();
+
         private static string GetSecrets(string appleSecret, string androidSecret)
             => new AppCenterSecretsBuilder()
                 .SetAppleSecret(appleSecret)

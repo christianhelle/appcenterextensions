@@ -70,5 +70,11 @@ namespace AppCenterExtensions
         /// This property controls the amount of logs emitted by the SDK.
         /// </summary>
         LogLevel LogLevel { get; set; }
+
+        /// <summary>
+        /// Get the unique session identifier for the app session.
+        /// This is generated upon calling Start() or StartAsync()
+        /// </summary>
+        string SessionId { get; }
     }
 }
