@@ -11,9 +11,8 @@ namespace AppCenterExtensions.XamarinForms
     /// </summary>
     public static class PageExtensions
     {
-        const string DurationKey = "Duration";
-
-        static readonly Dictionary<string, string> AdditionalTrackingInfo = new Dictionary<string, string>();
+        private const string DurationKey = "Duration";
+        private static readonly Dictionary<string, string> AdditionalTrackingInfo = new Dictionary<string, string>();
 
         /// <summary>
         /// Track the Page in AppCenter Analytics
@@ -34,14 +33,7 @@ namespace AppCenterExtensions.XamarinForms
 
             foreach (var additionalTrackingInfo in AdditionalTrackingInfo)
             {
-                if (properties.ContainsKey(additionalTrackingInfo.Key))
-                {
-                    properties[additionalTrackingInfo.Key] = additionalTrackingInfo.Value;
-                }
-                else
-                {
-                    properties.Add(additionalTrackingInfo.Key, additionalTrackingInfo.Value);
-                }
+                properties[additionalTrackingInfo.Key] = additionalTrackingInfo.Value;
             }
 
             (analytics ?? AppCenterAnalytics.Instance)
@@ -59,15 +51,14 @@ namespace AppCenterExtensions.XamarinForms
         {
             if (key == DurationKey)
                 return;
-
-            if (AdditionalTrackingInfo.ContainsKey(key))
-            {
-                AdditionalTrackingInfo[key] = value;
-            }
-            else
-            {
-                AdditionalTrackingInfo.Add(key, value);
-            }
+            AdditionalTrackingInfo[key] = value;
         }
+
+        /// <summary>
+        /// Get the currently configured additional tracking info
+        /// </summary>
+        /// <returns></returns>
+        public static IReadOnlyDictionary<string, string> GetAdditionalTrackingInfo() 
+            => AdditionalTrackingInfo;
     }
 }
