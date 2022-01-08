@@ -73,6 +73,13 @@ namespace AppCenterExtensions.Tests.Http
                 .ContinueWith(t => mockAppCenterSetup.Verify(
                     c => c.GetAppCenterInstallIdAsync()));
 
+        [Fact]
+        public async Task GetSessionId_Invoked()
+        {
+            await Prepare(new DummyDelegatingHandler(HttpStatusCode.OK));
+            mockAppCenterSetup.Verify(c => c.SessionId);
+        }
+
         private void VerifyAnalyticsTrackEvent(Times? times = null)
         {
             mockAnalytics.Verify(

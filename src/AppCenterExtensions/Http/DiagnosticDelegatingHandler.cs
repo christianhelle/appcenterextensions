@@ -80,6 +80,10 @@ namespace AppCenterExtensions.Http
             request.Headers.Add(
                 "X-SupportKey",
                 await appCenterSetup.GetSupportKeyAsync());
+
+            request.Headers.Add(
+                "X-AppSessionId",
+                appCenterSetup.SessionId);
         }
 
         private async Task<HttpResponseMessage> SendRequest(
