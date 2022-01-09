@@ -11,16 +11,16 @@ namespace AppCenterExtensions.Tests.Extensions
     public class TaskExtensionsTests
     {
         [Theory, AutoMoqData]
-        public void Forget_Invokes_Crashes_TrackError(
+        public async Task Forget_Invokes_Crashes_TrackError(
             Exception exception,
             ICrashes crashes)
         {
             var task = Task.Run(() => throw exception);
             task.Forget(true, crashes);
             
-            new Func<Task>(() => task)
+            await new Func<Task>(() => task)
                 .Should()
-                .Throw<Exception>();
+                .ThrowAsync<Exception>();
 
             Mock.Get(crashes).Verify(c => c.TrackError(exception, null));
         }
@@ -41,12 +41,12 @@ namespace AppCenterExtensions.Tests.Extensions
                 .NotThrow();
         
         [Theory, AutoMoqData]
-        public void WhenErrorReportAsync_Swallows_Exceptions(
+        public async Task WhenErrorReportAsync_Swallows_ExceptionsAsync(
             Exception exception)
-            => new Func<Task>(
+            => await new Func<Task>(
                     () => Task.Run(() => throw exception).WhenErrorReportAsync())
                 .Should()
-                .NotThrow();
+                .NotThrowAsync();
         
         [Theory, AutoMoqData]
         public async Task WhenErrorReportAsync_Invokes_Crashes_TrackError(
