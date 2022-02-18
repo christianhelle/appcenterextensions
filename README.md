@@ -7,6 +7,8 @@
 [![NuGet](https://img.shields.io/nuget/v/appcenterextensions.svg?style=flat-square)]( https://www.nuget.org/packages/appcenterextensions)
 [![NuGet](https://img.shields.io/nuget/dt/appcenterextensions.svg?style=flat-square)]( https://www.nuget.org/packages/appcenterextensions)
 
+[![buymeacoffee](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg)](https://www.buymeacoffee.com/christianhelle)
+
 # AppCenterExtensions
 A set of convenience classes and extension methods to simplify Crash Reporting and Analytics using AppCenter
 
