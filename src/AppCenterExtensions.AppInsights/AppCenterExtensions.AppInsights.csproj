@@ -7,7 +7,12 @@
     <Description>A set of convenience classes and extension methods for logging AppCenter information</Description>
     <PackageProjectUrl>https://github.com/christianhelle/appcenterextensions/blob/master/README.md</PackageProjectUrl>
     <RepositoryUrl>https://github.com/christianhelle/appcenterextensions</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 
   <PropertyGroup>
     <DocumentationFile>AppCenterExtensions.AppInsights.xml</DocumentationFile>

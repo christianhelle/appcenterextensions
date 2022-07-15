@@ -7,15 +7,20 @@
     <Description>A set of convenience classes and extension methods to simplify Crash Reporting and Analytics using AppCenter</Description>
     <PackageProjectUrl>https://github.com/christianhelle/appcenterextensions/blob/master/README.md</PackageProjectUrl>
     <RepositoryUrl>https://github.com/christianhelle/appcenterextensions</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 
   <PropertyGroup>
     <DocumentationFile>AppCenterExtensions.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="4.2.0" />
-    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="4.2.0" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="4.5.1" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="4.5.1" />
   </ItemGroup>
   
 </Project>
