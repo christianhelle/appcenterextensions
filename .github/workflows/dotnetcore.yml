@@ -13,6 +13,9 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '6.0.x'
+    - name: Install .NET MAUI workload
+      run: dotnet workload restore
+      working-directory: src/AppCenterExtensions.Maui
     - name: Build with dotnet
       run: dotnet build --configuration Release
       working-directory: src
