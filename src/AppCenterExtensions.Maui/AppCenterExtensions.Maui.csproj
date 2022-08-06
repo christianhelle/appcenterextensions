@@ -17,6 +17,15 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
+  <PropertyGroup>
+    <Title>AppCenter Extensions for .NET MAUI</Title>
+    <Authors>Christian Resma Helle</Authors>
+    <Description>A set of convenience classes and extension methods to simplify Crash Reporting and Analytics using AppCenter</Description>
+    <PackageProjectUrl>https://github.com/christianhelle/appcenterextensions/blob/master/README.md</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/christianhelle/appcenterextensions</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
 	<ItemGroup>
 	  <None Include="..\README.md" Link="README.md">
 	    <PackagePath>\</PackagePath>
