@@ -12,7 +12,7 @@ namespace AppCenterExtensions.Maui
     {
         private Stopwatch stopwatch;
 
-        /// <summary>When overridden, allows application developers to customize behavior immediately prior to the <see cref="T:Xamarin.Forms.Page" /> becoming visible.</summary>
+        /// <summary>When overridden, allows application developers to customize behavior immediately prior to the <see cref="T:Microsoft.Maui.Controls.Page" /> becoming visible.</summary>
         /// <remarks>To be added.</remarks>
         protected override void OnAppearing()
         {
@@ -22,7 +22,7 @@ namespace AppCenterExtensions.Maui
             TrackingApplication.TrackAppStart(GetType().Name.ToTrackingEventName());
         }
 
-        /// <summary>When overridden, allows the application developer to customize behavior as the <see cref="T:Xamarin.Forms.Page" /> disappears.</summary>
+        /// <summary>When overridden, allows the application developer to customize behavior as the <see cref="T:Microsoft.Maui.Controls.Page" /> disappears.</summary>
         /// <remarks>To be added.</remarks>
         protected override void OnDisappearing()
         {
