@@ -406,3 +406,4 @@ ASALocalRun/
 src/AppCenterExtensions.AppInsights/AppCenterExtensions.AppInsights.xml
 src/AppCenterExtensions.XamarinForms/AppCenterExtensions.XamarinForms.xml
 src/AppCenterExtensions/AppCenterExtensions.xml
+src/AppCenterExtensions.Maui/AppCenterExtensions.Maui.xml
