@@ -40,7 +40,7 @@ jobs:
           "AppCenterExtensions/AppCenterExtensions.csproj",
           "AppCenterExtensions.AppInsights/AppCenterExtensions.AppInsights.csproj",
           "AppCenterExtensions.Maui/AppCenterExtensions.Maui.csproj",
-          "AppCenterExtensions.Maui/AppCenterExtensions.XamarinForms.csproj"
+          "AppCenterExtensions.XamarinForms/AppCenterExtensions.XamarinForms.csproj"
         ) | ForEach-Object { ((Get-Content -Path $_ -Raw) -Replace "1.0.0", "${{ env.VERSION }}") | Set-Content -Path $_ }
       working-directory: src
 
