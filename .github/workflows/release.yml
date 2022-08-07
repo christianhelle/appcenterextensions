@@ -24,6 +24,7 @@ jobs:
 
     - name: Install .NET MAUI workload
       run: dotnet workload restore
+      working-directory: src/AppCenterExtensions.Maui
 
     - name: Sets environment variables - branch-name
       uses: nelonoel/branch-name@v1.0.1
