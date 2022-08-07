@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/christianhelle/appcenterextensions.svg?branch=master)](https://travis-ci.com/christianhelle/appcenterextensions)
 [![Build status](https://ci.appveyor.com/api/projects/status/v40yoysqa4apes77/branch/master?svg=true)](https://ci.appveyor.com/project/christianhelle/appcenterextensions/branch/master)
-![.NET Core](https://github.com/christianhelle/appcenterextensions/workflows/.NET%20Core/badge.svg?branch=master)
+[![.NET Core](https://github.com/christianhelle/appcenterextensions/actions/workflows/build.yml/badge.svg)](https://github.com/christianhelle/appcenterextensions/actions/workflows/build.yml)
 [![Build status](https://dev.azure.com/christianhelle/AppCenter%20Extensions/_apis/build/status/CI%20Build)](https://dev.azure.com/christianhelle/AppCenter%20Extensions/_build/latest?definitionId=-1)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=christianhelle_appcenterextensions&metric=alert_status)](https://sonarcloud.io/dashboard?id=christianhelle_appcenterextensions)
 
