@@ -14,7 +14,7 @@ A set of convenience classes and extension methods to simplify Crash Reporting a
 
 ## Features
 - User interaction reporting using `ICommand` implementations
-- Automatic page tracking in **Xamarin.Forms** including time spent on screen
+- Automatic page tracking in **Xamarin.Forms** and **.NET MAUI** including time spent on screen
 - Extension methods for crash reporting
 - Anonymous user information configuration
 
