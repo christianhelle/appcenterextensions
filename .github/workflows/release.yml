@@ -53,7 +53,7 @@ jobs:
     - name: Push packages to NuGet
       run: |
         @(
-          "AppCenterExtensions/bin/Release/AppCenterExtensions.${{ env.VERSION }}.nupkg,
+          "AppCenterExtensions/bin/Release/AppCenterExtensions.${{ env.VERSION }}.nupkg",
           "AppCenterExtensions.AppInsights/bin/Release/AppCenterExtensions.AppInsights.${{ env.VERSION }}.nupkg",
           "AppCenterExtensions.Maui/bin/Release/AppCenterExtensions.Maui.${{ env.VERSION }}.nupkg",
           "AppCenterExtensions.XamarinForms/bin/Release/AppCenterExtensions.XamarinForms.${{ env.VERSION }}.nupkg"
