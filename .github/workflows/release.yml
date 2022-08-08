@@ -51,7 +51,14 @@ jobs:
       run: dotnet pack --no-build -c Release /p:UseSourceLink=true src/AppCenterExtensions.sln -p:PackageVersion="${{ env.VERSION }}"
 
     - name: Push packages to NuGet
-      run: dotnet nuget push **/*.nupkg -k ${{ secrets.NUGET_KEY }} -s ${{ env.NUGET_REPO_URL }} --no-symbols true
+      run: |
+        @(
+          "AppCenterExtensions/bin/Release/AppCenterExtensions.${{ env.VERSION }}.nupkg,
+          "AppCenterExtensions.AppInsights/bin/Release/AppCenterExtensions.AppInsights.${{ env.VERSION }}.nupkg",
+          "AppCenterExtensions.Maui/bin/Release/AppCenterExtensions.Maui.${{ env.VERSION }}.nupkg",
+          "AppCenterExtensions.XamarinForms/bin/Release/AppCenterExtensions.XamarinForms.${{ env.VERSION }}.nupkg"
+        ) | ForEach-Object { dotnet nuget push $_ -k ${{ secrets.NUGET_KEY }} -s ${{ env.NUGET_REPO_URL }} --no-symbols true }
+      working-directory: src
 
     - name: Publish artifacts
       uses: actions/upload-artifact@v2
