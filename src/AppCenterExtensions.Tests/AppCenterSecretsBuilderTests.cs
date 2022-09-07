@@ -20,13 +20,21 @@ namespace AppCenterExtensions.Tests
                 .ThrowExactly<ArgumentNullException>();
 
         [Theory, AutoMoqData]
+        public void Requires_UwpSecret(AppCenterSecretsBuilder sut)
+            => new Action(() => sut.SetUwpSecret(null))
+                .Should()
+                .ThrowExactly<ArgumentNullException>();
+
+        [Theory, AutoMoqData]
         public void Build_Returns_NotNull(
             AppCenterSecretsBuilder sut,
             string appleSecret,
-            string androidSecret)
+            string androidSecret,
+            string uwpSecret)
             => sut
                 .SetAppleSecret(appleSecret)
                 .SetAndroidSecret(androidSecret)
+                .SetUwpSecret(uwpSecret)
                 .Build()
                 .Should()
                 .NotBeNullOrWhiteSpace();
@@ -35,21 +43,24 @@ namespace AppCenterExtensions.Tests
         public void Build_Returns_AppCenterSecret(
             AppCenterSecretsBuilder sut,
             string appleSecret,
-            string androidSecret)
+            string androidSecret,
+            string uwpSecret)
             => sut
                 .SetAppleSecret(appleSecret)
                 .SetAndroidSecret(androidSecret)
+                .SetUwpSecret(uwpSecret)
                 .Build()
                 .Should()
-                .Be($"ios={appleSecret};android={androidSecret}");
+                .Be($"ios={appleSecret};android={androidSecret};uwp={uwpSecret};");
 
         [Theory, AutoMoqData]
         public void Static_Build_Returns_AppCenterSecret(
             string appleSecret,
-            string androidSecret)
+            string androidSecret,
+            string uwpSecret)
             => AppCenterSecretsBuilder
-                .Build(appleSecret, androidSecret)
+                .Build(appleSecret, androidSecret, uwpSecret)
                 .Should()
-                .Be($"ios={appleSecret};android={androidSecret}");
+                .Be($"ios={appleSecret};android={androidSecret};uwp={uwpSecret};");
     }
 }
