@@ -16,24 +16,6 @@ namespace AppCenterExtensions.Tests.XamarinForms
         public void AppLaunchTime_NotNull()
             => TrackingApplication.AppLaunchTime.Should().NotBeNull();
 
-        [Theory, AutoData]
-        public void Requires_ApppleSecret(string secret)
-            => new Action(() => TrackingApplication.Initialize(
-                    null,
-                    secret,
-                    false))
-                .Should()
-                .ThrowExactly<ArgumentNullException>();
-
-        [Theory, AutoData]
-        public void Requires_AndroidSecret(string secret)
-            => new Action(() => TrackingApplication.Initialize(
-                    secret,
-                    null,
-                    false))
-                .Should()
-                .ThrowExactly<ArgumentNullException>();
-
         [Theory, AutoMoqData]
         public void Invokes_AppCenterSetup_Start(
             string secrets,
@@ -52,8 +34,8 @@ namespace AppCenterExtensions.Tests.XamarinForms
             bool anonymizeUser,
             IAppCenterSetup appCenterSetup)
         {
-            TrackingApplication.Initialize(appleSecret, androidSecret, anonymizeUser, appCenterSetup);
-            Mock.Get(appCenterSetup).Verify(c => c.Start(appleSecret, androidSecret, anonymizeUser));
+            TrackingApplication.Initialize(appleSecret, androidSecret, null, null, anonymizeUser, appCenterSetup);
+            Mock.Get(appCenterSetup).Verify(c => c.Start(appleSecret, androidSecret, null, null, anonymizeUser));
         }
     }
 }
