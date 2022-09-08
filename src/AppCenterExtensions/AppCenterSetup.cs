@@ -33,6 +33,22 @@ namespace AppCenterExtensions
         /// <summary>
         /// Start AppCenter Crash Reporting and Analytics
         /// </summary>
+        /// <param name="appleSecret">iOS secret</param>
+        /// <param name="androidSecret">Android secret</param>
+        /// <param name="uwpSecret">UWP secret</param>
+        /// <param name="macosSecret">MacOS secret</param>
+        /// <param name="anonymizeUser">Set to TRUE to use a 8 character unique key as the UserId</param>
+        public void Start(
+            string appleSecret,
+            string androidSecret,
+            string uwpSecret = null,
+            string macosSecret = null,
+            bool anonymizeUser = false)
+            => Start(GetSecrets(appleSecret, androidSecret, uwpSecret, macosSecret), anonymizeUser);
+
+        /// <summary>
+        /// Start AppCenter Crash Reporting and Analytics
+        /// </summary>
         /// <param name="appSecret">AppCenter secrets for all supported platforms</param>
         /// <param name="anonymizeUser">Set to TRUE to use a 8 character unique key as the UserId</param>
         public void Start(string appSecret, bool anonymizeUser = false)
@@ -43,10 +59,17 @@ namespace AppCenterExtensions
         /// </summary>
         /// <param name="appleSecret">iOS secret</param>
         /// <param name="androidSecret">Android secret</param>
+        /// <param name="uwpSecret">UWP secret</param>
+        /// <param name="macosSecret">MacOS secret</param>
         /// <param name="anonymizeUser">Set to TRUE to use a 8 character unique key as the UserId</param>
         /// <returns>An awaitable task</returns>
-        public Task StartAsync(string appleSecret, string androidSecret, bool anonymizeUser = false)
-            => StartAsync(GetSecrets(appleSecret, androidSecret), anonymizeUser);
+        public Task StartAsync(
+            string appleSecret,
+            string androidSecret,
+            string uwpSecret = null,
+            string macosSecret = null,
+            bool anonymizeUser = false)
+            => StartAsync(GetSecrets(appleSecret, androidSecret, uwpSecret, macosSecret), anonymizeUser);
 
         /// <summary>
         /// Start AppCenter Crash Reporting and Analytics
@@ -118,10 +141,18 @@ namespace AppCenterExtensions
         /// </summary>
         public string SessionId { get; } = Guid.NewGuid().ToString();
 
-        private static string GetSecrets(string appleSecret, string androidSecret)
-            => new AppCenterSecretsBuilder()
-                .SetAppleSecret(appleSecret)
-                .SetAndroidSecret(androidSecret)
-                .Build();
+        private static string GetSecrets(
+            string appleSecret,
+            string androidSecret,
+            string uwpSecret = null,
+            string macosSecret = null)
+        {
+            var builder = new AppCenterSecretsBuilder();
+            if (appleSecret != null) builder.SetAppleSecret(appleSecret);
+            if (androidSecret != null) builder.SetAndroidSecret(androidSecret);
+            if (uwpSecret != null) builder.SetUwpSecret(uwpSecret);
+            if (macosSecret != null) builder.SetMacOSSecret(macosSecret);
+            return builder.Build();
+        }
     }
 }

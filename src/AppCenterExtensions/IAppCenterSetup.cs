@@ -14,8 +14,15 @@ namespace AppCenterExtensions
         /// </summary>
         /// <param name="appleSecret">iOS secret</param>
         /// <param name="androidSecret">Android secret</param>
+        /// <param name="uwpSecret">UWP secret</param>
+        /// <param name="macosSecret">MacOS secret</param>
         /// <param name="anonymizeUser">Set to TRUE to use a 8 character unique key as the UserId</param>
-        void Start(string appleSecret, string androidSecret, bool anonymizeUser = false);
+        void Start(
+            string appleSecret,
+            string androidSecret,
+            string uwpSecret = null,
+            string macosSecret = null,
+            bool anonymizeUser = false);
         
         /// <summary>
         /// Start AppCenter Crash Reporting and Analytics
@@ -29,9 +36,16 @@ namespace AppCenterExtensions
         /// </summary>
         /// <param name="appleSecret">iOS secret</param>
         /// <param name="androidSecret">Android secret</param>
+        /// <param name="uwpSecret">UWP secret</param>
+        /// <param name="macosSecret">MacOS secret</param>
         /// <param name="anonymizeUser">Set to TRUE to use a 8 character unique key as the UserId</param>
         /// <returns>An awaitable task</returns>
-        Task StartAsync(string appleSecret, string androidSecret, bool anonymizeUser = false);
+        Task StartAsync(
+            string appleSecret,
+            string androidSecret,
+            string uwpSecret = null,
+            string macosSecret = null,
+            bool anonymizeUser = false);
         
         /// <summary>
         /// Start AppCenter Crash Reporting and Analytics
