@@ -23,6 +23,9 @@ This library is configured almost the same way as the AppCenter SDK. You provide
 AppCenterSetup.Instance.Start(
     "[iOS AppCenter secret]",
     "[Android AppCenter secret]",
+    "[UWP AppCenter secret]",
+    "[MacOS AppCenter secret]",
+    "[WPF/WinForms AppCenter secret]",
     anonymizeAppCenterUser: true);
 ```
 
@@ -32,6 +35,9 @@ or
 await AppCenterSetup.Instance.StartAsync(
     "[iOS AppCenter secret]",
     "[Android AppCenter secret]",
+    "[UWP AppCenter secret]",
+    "[MacOS AppCenter secret]",
+    "[WPF/WinForms AppCenter secret]",
     anonymizeAppCenterUser: true);
 ```
 
