@@ -22,15 +22,19 @@ namespace AppCenterExtensions.XamarinForms
         /// </summary>
         /// <param name="appleSecret">iOS secret</param>
         /// <param name="androidSecret">Android secret</param>
+        /// <param name="uwpSecret">UWP secret</param>
+        /// <param name="macosSecret">MacOS secret</param>
         /// <param name="anonymizeUser">Set to TRUE to use a 8 character unique key as the UserId</param>
         /// <param name="appCenterSetup">Keep this as NULL to use the default implementation. This is only exposed for unit testing purposes</param>
         public static void Initialize(
             string appleSecret,
             string androidSecret,
-            bool anonymizeUser,
+            string uwpSecret = null,
+            string macosSecret = null,
+            bool anonymizeUser = true,
             IAppCenterSetup appCenterSetup = null)
             => (appCenterSetup ?? AppCenterSetup.Instance)
-                .Start(appleSecret, androidSecret, anonymizeUser);
+                .Start(appleSecret, androidSecret, uwpSecret, macosSecret, anonymizeUser);
 
         /// <summary>
         /// Convenience method for initializing AppCenter
