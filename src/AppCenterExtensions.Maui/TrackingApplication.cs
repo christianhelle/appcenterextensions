@@ -23,6 +23,7 @@ namespace AppCenterExtensions.Maui
         /// <param name="androidSecret">Android secret</param>
         /// <param name="uwpSecret">UWP secret</param>
         /// <param name="macosSecret">MacOS secret</param>
+        /// <param name="windowsDesktopSecret">UWP/WinForms secret</param>
         /// <param name="anonymizeUser">Set to TRUE to use a 8 character unique key as the UserId</param>
         /// <param name="appCenterSetup">Keep this as NULL to use the default implementation. This is only exposed for unit testing purposes</param>
         public static void Initialize(
@@ -30,10 +31,11 @@ namespace AppCenterExtensions.Maui
             string androidSecret,
             string uwpSecret = null,
             string macosSecret = null,
+            string windowsDesktopSecret = null,
             bool anonymizeUser = true,
             IAppCenterSetup appCenterSetup = null)
             => (appCenterSetup ?? AppCenterSetup.Instance)
-                .Start(appleSecret, androidSecret, uwpSecret, macosSecret, anonymizeUser);
+                .Start(appleSecret, androidSecret, uwpSecret, macosSecret, windowsDesktopSecret, anonymizeUser);
 
         /// <summary>
         /// Convenience method for initializing AppCenter

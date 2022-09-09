@@ -37,14 +37,16 @@ namespace AppCenterExtensions
         /// <param name="androidSecret">Android secret</param>
         /// <param name="uwpSecret">UWP secret</param>
         /// <param name="macosSecret">MacOS secret</param>
+        /// <param name="windowsDesktopSecret">UWP/WinForms secret</param>
         /// <param name="anonymizeUser">Set to TRUE to use a 8 character unique key as the UserId</param>
         public void Start(
             string appleSecret,
             string androidSecret,
             string uwpSecret = null,
             string macosSecret = null,
+            string windowsDesktopSecret = null,
             bool anonymizeUser = false)
-            => Start(GetSecrets(appleSecret, androidSecret, uwpSecret, macosSecret), anonymizeUser);
+            => Start(GetSecrets(appleSecret, androidSecret, uwpSecret, macosSecret, windowsDesktopSecret), anonymizeUser);
 
         /// <summary>
         /// Start AppCenter Crash Reporting and Analytics
@@ -61,6 +63,7 @@ namespace AppCenterExtensions
         /// <param name="androidSecret">Android secret</param>
         /// <param name="uwpSecret">UWP secret</param>
         /// <param name="macosSecret">MacOS secret</param>
+        /// <param name="windowsDesktopSecret">UWP/WinForms secret</param>
         /// <param name="anonymizeUser">Set to TRUE to use a 8 character unique key as the UserId</param>
         /// <returns>An awaitable task</returns>
         public Task StartAsync(
@@ -68,8 +71,9 @@ namespace AppCenterExtensions
             string androidSecret,
             string uwpSecret = null,
             string macosSecret = null,
+            string windowsDesktopSecret = null,
             bool anonymizeUser = false)
-            => StartAsync(GetSecrets(appleSecret, androidSecret, uwpSecret, macosSecret), anonymizeUser);
+            => StartAsync(GetSecrets(appleSecret, androidSecret, uwpSecret, macosSecret, windowsDesktopSecret), anonymizeUser);
 
         /// <summary>
         /// Start AppCenter Crash Reporting and Analytics
@@ -145,13 +149,15 @@ namespace AppCenterExtensions
             string appleSecret,
             string androidSecret,
             string uwpSecret = null,
-            string macosSecret = null)
+            string macosSecret = null,
+            string windowsDesktopSecret = null)
         {
             var builder = new AppCenterSecretsBuilder();
             if (appleSecret != null) builder.SetAppleSecret(appleSecret);
             if (androidSecret != null) builder.SetAndroidSecret(androidSecret);
             if (uwpSecret != null) builder.SetUwpSecret(uwpSecret);
             if (macosSecret != null) builder.SetMacOSSecret(macosSecret);
+            if (windowsDesktopSecret != null) builder.SetWindowsDesktopSecret(windowsDesktopSecret);
             return builder.Build();
         }
     }

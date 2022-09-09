@@ -32,17 +32,25 @@ namespace AppCenterExtensions.Tests
                 .ThrowExactly<ArgumentNullException>();
 
         [Theory, AutoMoqData]
+        public void Requires_WindowsDesktopSecret(AppCenterSecretsBuilder sut)
+            => new Action(() => sut.SetWindowsDesktopSecret(null))
+                .Should()
+                .ThrowExactly<ArgumentNullException>();
+
+        [Theory, AutoMoqData]
         public void Build_Returns_NotNull(
             AppCenterSecretsBuilder sut,
             string appleSecret,
             string androidSecret,
             string uwpSecret,
-            string macosSecret)
+            string macosSecret,
+            string windowsDesktopSecret)
             => sut
                 .SetAppleSecret(appleSecret)
                 .SetAndroidSecret(androidSecret)
                 .SetUwpSecret(uwpSecret)
                 .SetMacOSSecret(macosSecret)
+                .SetWindowsDesktopSecret(windowsDesktopSecret)
                 .Build()
                 .Should()
                 .NotBeNullOrWhiteSpace();
@@ -53,25 +61,28 @@ namespace AppCenterExtensions.Tests
             string appleSecret,
             string androidSecret,
             string uwpSecret,
-            string macosSecret)
+            string macosSecret,
+            string windowsDesktopSecret)
             => sut
                 .SetAppleSecret(appleSecret)
                 .SetAndroidSecret(androidSecret)
                 .SetUwpSecret(uwpSecret)
                 .SetMacOSSecret(macosSecret)
+                .SetWindowsDesktopSecret(windowsDesktopSecret)
                 .Build()
                 .Should()
-                .Be($"ios={appleSecret};android={androidSecret};uwp={uwpSecret};macos={macosSecret};");
+                .Be($"ios={appleSecret};android={androidSecret};uwp={uwpSecret};macos={macosSecret};windowsdesktop={windowsDesktopSecret};");
 
         [Theory, AutoMoqData]
         public void Static_Build_Returns_AppCenterSecret(
             string appleSecret,
             string androidSecret,
             string uwpSecret,
-            string macosSecret)
+            string macosSecret,
+            string windowsDesktopSecret)
             => AppCenterSecretsBuilder
-                .Build(appleSecret, androidSecret, uwpSecret, macosSecret)
+                .Build(appleSecret, androidSecret, uwpSecret, macosSecret, windowsDesktopSecret)
                 .Should()
-                .Be($"ios={appleSecret};android={androidSecret};uwp={uwpSecret};macos={macosSecret};");
+                .Be($"ios={appleSecret};android={androidSecret};uwp={uwpSecret};macos={macosSecret};windowsdesktop={windowsDesktopSecret};");
     }
 }
