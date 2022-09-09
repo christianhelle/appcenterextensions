@@ -12,6 +12,7 @@ namespace AppCenterExtensions
         private string androidSecret;
         private string uwpSecret;
         private string macosSecret;
+        private string windowsDesktopSecret;
 
         /// <summary>
         /// Set the API secret for the iOS app
@@ -58,6 +59,17 @@ namespace AppCenterExtensions
         }
 
         /// <summary>
+        /// Sets the API secret for the Windows desktop apps
+        /// </summary>
+        /// <param name="secret">WPF/WinForms secret</param>
+        /// <returns>Returns self (Fluent API)</returns>
+        public AppCenterSecretsBuilder SetWindowsDesktopSecret(string secret)
+        {
+            windowsDesktopSecret = secret ?? throw new ArgumentNullException(nameof(secret));
+            return this;
+        }
+
+        /// <summary>
         /// Builds a single AppCenter API secret string
         /// </summary>
         /// <returns>This returns a string like ios={secret};android={secret}</returns>
@@ -76,6 +88,9 @@ namespace AppCenterExtensions
 
             if (!string.IsNullOrWhiteSpace(macosSecret))
                 builder.Append($"macos={macosSecret};");
+            
+            if (!string.IsNullOrWhiteSpace(windowsDesktopSecret))
+                builder.Append($"windowsdesktop={windowsDesktopSecret};");
 
             return builder.ToString();
         }
@@ -87,15 +102,23 @@ namespace AppCenterExtensions
         /// <param name="androidSecret">Android secret</param>
         /// <param name="uwpSecret">UWP secret</param>
         /// <param name="macosSecret">MacOS secret</param>
+        /// <param name="windowsDesktopSecret">WPF/WinForms secret</param>
         /// <returns>This returns a string like ios={secret};android={secret}</returns>
-        public static string Build(string appleSecret, string androidSecret, string uwpSecret, string macosSecret)
+        public static string Build(
+            string appleSecret,
+            string androidSecret,
+            string uwpSecret,
+            string macosSecret, 
+            string windowsDesktopSecret)
         {
             var builder = new AppCenterSecretsBuilder();
             if (appleSecret != null) builder.SetAppleSecret(appleSecret);
             if (androidSecret != null) builder.SetAndroidSecret(androidSecret);
             if (uwpSecret != null) builder.SetUwpSecret(uwpSecret);
             if (macosSecret != null) builder.SetMacOSSecret(macosSecret);
-            return builder.Build();
+            if (windowsDesktopSecret != null) builder.SetWindowsDesktopSecret(windowsDesktopSecret);
+            var str = builder.Build();
+            return str;
         }
     }
 }
