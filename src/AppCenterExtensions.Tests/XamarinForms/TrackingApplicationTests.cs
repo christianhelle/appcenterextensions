@@ -34,8 +34,9 @@ namespace AppCenterExtensions.Tests.XamarinForms
             bool anonymizeUser,
             IAppCenterSetup appCenterSetup)
         {
-            TrackingApplication.Initialize(appleSecret, androidSecret, null, null, anonymizeUser, appCenterSetup);
-            Mock.Get(appCenterSetup).Verify(c => c.Start(appleSecret, androidSecret, null, null, anonymizeUser));
+            TrackingApplication.Initialize(appleSecret, androidSecret, null, null, null, anonymizeUser, appCenterSetup);
+            Mock.Get(appCenterSetup)
+                .Verify(c => c.Start(appleSecret, androidSecret, null, null, null, anonymizeUser));
         }
     }
 }
