@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AppCenter.Analytics;
 
-namespace AppCenterExtensions.XamarinForms
+namespace AppCenterExtensions
 {
     /// <summary>
     /// Helper class for tracking application start time 
