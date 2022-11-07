@@ -24,16 +24,14 @@ namespace AppCenterExtensions.Tests.Infrastructure
             _getStreamAsync = getStreamAsync;
         }
 
-        public string GetMD5Hash(string input)
+        public string GetHash(string input)
         {
-            throw new NotImplementedException();
+            return input;
         }
 
-        static int hex(int v)
+        public string GetMD5Hash(string input)
         {
-            if (v < 10)
-                return '0' + v;
-            return 'a' + v - 10;
+            return input;
         }
 
         public double GetNamedSize(NamedSize size, Type targetElement, bool useOldSizes)
@@ -55,6 +53,11 @@ namespace AppCenterExtensions.Tests.Infrastructure
             }
         }
 
+        public Color GetNamedColor(string name)
+        {
+            throw new NotImplementedException();
+        }
+
         public void OpenUriAction(Uri uri)
         {
             if (_openUriAction != null)
@@ -72,6 +75,7 @@ namespace AppCenterExtensions.Tests.Infrastructure
             => default(SizeRequest);
 
         public bool IsInvokeRequired => false;
+        public OSAppTheme RequestedTheme { get; }
 
         public string RuntimePlatform { get; set; }
 
