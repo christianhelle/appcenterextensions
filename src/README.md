@@ -9,7 +9,7 @@ A set of convenience classes and extension methods to simplify Crash Reporting a
 
 ## NuGet Packages
 
-This library is distributed as 3 nuget packages
+This library is distributed as 4 nuget packages
 - [AppCenterExtensions](https://www.nuget.org/packages/appcenterextensions) - This contains extension methods, `ICommand` implementations, and convenience classes for initializing and configuring AppCenter. This package depends on [Microsoft.AppCenter.Analytics](https://www.nuget.org/packages/Microsoft.AppCenter.Analytics/) and [Microsoft.AppCenter.Crashes](https://www.nuget.org/packages/Microsoft.AppCenter.Crashes/) version 2.6.4
 - [AppCenterExtensions.Maui](https://www.nuget.org/packages/appcenterextensions.maui) - This contains components required for automatic page tracking using [.NET MAUI](https://github.com/dotnet/maui). This package depends on [AppCenterExtensions](https://www.nuget.org/packages/appcenterextensions)
 - [AppCenterExtensions.XamarinForms](https://www.nuget.org/packages/appcenterextensions.xamarinforms) - This contains components required for automatic page tracking using [Xamarin.Forms](https://github.com/xamarin/Xamarin.Forms). This package depends on [AppCenterExtensions](https://www.nuget.org/packages/appcenterextensions) and [Xamarin.Forms](https://www.nuget.org/packages/Xamarin.Forms/) version 4.0.0
