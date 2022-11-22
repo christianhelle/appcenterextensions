@@ -2,11 +2,6 @@ name: Sample
 
 on:
   push:
-    paths-ignore:
-      - '**/*'
-      - '!.github/workflows/build.yml'
-      - '!src/**/*.csproj'
-      - '!src/**/*.cs'
     branches: 
     - '*'
     schedule:
