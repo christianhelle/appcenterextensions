@@ -39,6 +39,7 @@ jobs:
           7.0.x
     - name: Restore
       run: dotnet restore SampleApp.sln
+      working-directory: sample
     - name: Build
       run: dotnet build --configuration Release SampleApp.sln
       working-directory: sample
