@@ -1,0 +1,49 @@
+name: Sample
+
+on:
+  push:
+    paths-ignore:
+      - '**/*'
+      - '!.github/workflows/build.yml'
+      - '!src/**/*.csproj'
+      - '!src/**/*.cs'
+    branches: 
+    - '*'
+    schedule:
+      - cron: '0 */1 * * *'
+
+jobs:
+  build:
+
+    runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.os == 'macos-11.0' || matrix.node == 10 }}
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [12, 14, 15, 16]
+        format: [ json, yaml ]
+        version: [ V2, V3 ]
+        os: [
+          ubuntu-18.04,
+          ubuntu-20.04,
+          ubuntu-22.04,
+          macos-10.15,
+          macos-11,
+          macos-12,
+          windows-2019,
+          windows-2022
+        ]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: |
+          6.0.x
+          7.0.x
+    - name: Restore
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release
+      working-directory: sample
