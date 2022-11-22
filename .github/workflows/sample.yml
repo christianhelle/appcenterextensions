@@ -39,8 +39,6 @@ jobs:
           6.0.x
           7.0.x
     - name: Restore
-      run: dotnet restore SampleApp.sln
-      working-directory: sample
+      run: dotnet restore sample/SampleApp/SampleApp.csproj
     - name: Build
-      run: dotnet build SampleApp.sln
-      working-directory: sample
+      run: dotnet build sample/SampleApp/SampleApp.csproj
