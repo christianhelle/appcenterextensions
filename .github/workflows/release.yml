@@ -69,6 +69,7 @@ jobs:
           "AppCenterExtensions.XamarinForms/bin/Release/AppCenterExtensions.XamarinForms.${{ env.VERSION }}.nupkg"
         ) | ForEach-Object { dotnet nuget push $_ -k ${{ secrets.NUGET_KEY }} -s ${{ env.NUGET_REPO_URL }} --no-symbols true }
       working-directory: src
+      continue-on-error: true
 
   tag:
     needs: nuget
