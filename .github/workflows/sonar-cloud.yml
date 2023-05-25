@@ -64,7 +64,9 @@ jobs:
               /d:sonar.cs.vscoveragexml.reportsPaths=AppCenterExtensions.Tests/TestResults/**/*.coveragexml
 
       - name: Install .NET MAUI workload
-        run: dotnet workload restore
+        run: |
+          dotnet workload restore
+          dotnet workload restore maui-android
         working-directory: src/AppCenterExtensions.Maui
 
       - name: Build with dotnet
