@@ -17,18 +17,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: |
-          6.0.x
-          7.0.x
     - name: Install .NET MAUI workload
-      run: dotnet workload restore
+      run: dotnet workload restore --project AppCenterExtensions.Maui.csproj
       working-directory: src/AppCenterExtensions.Maui
     - name: Build with dotnet
       run: dotnet build --configuration Release
       working-directory: src
     - name: Test with dotnet
-      run: dotnet test --configuration Release
+      run: dotnet test --configuration Release --no-build
       working-directory: src
