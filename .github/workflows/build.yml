@@ -20,6 +20,9 @@ jobs:
     - name: Install .NET MAUI workload
       run: dotnet workload restore --project AppCenterExtensions.Maui.csproj
       working-directory: src/AppCenterExtensions.Maui
+    - name: Restore workloads
+      run: dotnet workload restore
+      working-directory: src
     - name: Build with dotnet
       run: dotnet build --configuration Release
       working-directory: src
