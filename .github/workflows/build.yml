@@ -16,7 +16,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Install .NET MAUI workload
       run: dotnet workload restore --project AppCenterExtensions.Maui.csproj
       working-directory: src/AppCenterExtensions.Maui
