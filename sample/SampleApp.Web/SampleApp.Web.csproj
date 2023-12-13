@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.12.0" />
-    <PackageReference Include="AppCenterExtensions.AppInsights" Version="1.0.1294" />
+    <PackageReference Include="AppCenterExtensions.AppInsights" Version="1.1.11" />
   </ItemGroup>
 
   <ItemGroup>
