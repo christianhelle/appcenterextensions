@@ -15,15 +15,12 @@ on:
 
 jobs:
   build:
-
     runs-on: windows-latest
-
     steps:
     - uses: actions/checkout@v4
     - name: Install .NET MAUI workload
       run: dotnet workload restore --project AppCenterExtensions.Maui.csproj
       working-directory: src/AppCenterExtensions.Maui
-      working-directory: src
     - name: Build with dotnet
       run: dotnet build --configuration Release
       working-directory: src
