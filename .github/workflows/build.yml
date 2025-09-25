@@ -17,7 +17,7 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - name: Install .NET MAUI workload
       run: |
         dotnet workload install maui --source https://api.nuget.org/v3/index.json
